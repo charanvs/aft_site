@@ -1,3 +1,9 @@
+@extends('frontend.main_master')
+@section('main')
+@section('title')
+  AFT-PB | Members
+@endsection
+@include('frontend.body.header')
   <!-- Team Area Three -->
   <div class="team-area-three pt-100 pb-70">
     <div class="container">
@@ -128,3 +134,4 @@
     </div>
 </div>
 <!-- Team Area Three End -->
+@endsection

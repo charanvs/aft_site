@@ -55,40 +55,37 @@
                     <div class="collapse navbar-collapse mean-menu" id="navbarSupportedContent">
                         <ul class="navbar-nav m-auto">
                             <li class="nav-item">
-                               <a href="contact.html" class="nav-link">
-                                <h6>Home</h6>
+                               <a href="{{ url('/') }}" class="nav-link">
+                                Home
                             </a>
                             </li>
                             <li class="nav-item">
-                                <a href="contact.html" class="nav-link">
-                                    <h6>Members</h6>
+                                <a href="{{ route('members.page') }}" class="nav-link">
+                                    Members
 
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a href="#" class="nav-link">
-                                    <h6> Case Management
+                                 Case Management
 
                                     <i class='bx bx-chevron-down'></i>
-                                </h6>
                                 </a>
                                 <ul class="dropdown-menu">
                                     <li class="nav-item">
-                                        <a href="book.html" class="nav-link">
-                                            <span class="fw-bold fs-6">Daily Cause List</span>
+                                        <a href="{{ route('daily_cause_list.page') }}" class="nav-link">
+                                            Daily Cause List
                                         </a>
                                     </li>
 
                                     <li class="nav-item">
                                         <a href="team.html" class="nav-link">
-                                            <span class="fw-bold fs-6">Search Orders</span>
-
+                                            Search Orders
                                         </a>
                                     </li>
                                     <li class="nav-item">
                                         <a href="faq.html" class="nav-link">
-                                            <span class="fw-bold fs-6">Daily Orders</span>
-
+                                            Daily Orders
                                         </a>
                                     </li>
 
@@ -97,183 +94,145 @@
                             </li>
                             <li class="nav-item">
                                 <a href="#" class="nav-link">
-                                    <h6>Judgements
-                                        <i class='bx bx-chevron-down'></i></h6>
+                                    Judgements
+                                        <i class='bx bx-chevron-down'></i>
 
                                 </a>
                                 <ul class="dropdown-menu">
                                     <li class="nav-item">
                                         <a href="book.html" class="nav-link">
-                                            <span class="fw-bold fs-6">Judgements in AFT PB</span>
-
+                                            Judgements in AFT PB
                                         </a>
                                     </li>
 
                                     <li class="nav-item">
                                         <a href="team.html" class="nav-link">
-                                            <span class="fw-bold fs-6">Reportable Judgements</span>
+                                            Reportable Judgements
 
                                         </a>
                                     </li>
                                     <li class="nav-item">
                                         <a href="faq.html" class="nav-link">
-                                            <span class="fw-bold fs-6">Large Bench Orders</span>
-
+                                            Large Bench Orders
                                         </a>
                                     </li>
 
                                     <li class="nav-item">
                                         <a href="restaurant.html" class="nav-link">
-                                            <span class="fw-bold fs-6">Review Cases Of Regional Branches</span>
+                                            Review Cases Of Regional Branches
 
                                         </a>
                                     </li>
 
                                     <li class="nav-item">
                                         <a href="reservation.html" class="nav-link">
-                                            <span class="fw-bold fs-6">Large Bench Circulars</span>
-
+                                            Large Bench Circulars
                                         </a>
                                     </li>
-
-
                                 </ul>
                             </li>
 
                             <li class="nav-item">
                                 <a href="#" class="nav-link">
-                                    <h6> Regional Benches
-                                        <i class='bx bx-chevron-down'></i></h6>
+                                    Regional Benches
+                                        <i class='bx bx-chevron-down'></i>
 
                                 </a>
                                 <ul class="dropdown-menu">
                                     <li class="nav-item">
                                         <a href="book.html" class="nav-link">
-                                            <span class="fw-bold fs-6">Chandigarh</span>
-
-
+                                            Chandigarh
                                         </a>
 
                                     </li>
 
                                     <li class="nav-item">
                                         <a href="team.html" class="nav-link">
-                                            <span class="fw-bold fs-6">Chennai</span>
-
-
+                                            Chennai
                                         </a>
 
                                     </li>
                                     <li class="nav-item">
                                         <a href="faq.html" class="nav-link">
-                                            <span class="fw-bold fs-6">Guwhati</span>
-
+                                            Guwhati
                                         </a>
 
                                     </li>
                                     <li class="nav-item">
                                         <a href="faq.html" class="nav-link">
-                                            <span class="fw-bold fs-6">Jabalpur</span>
-
-
+                                            Jabalpur
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="faq.html" class="nav-link">
+                                            Jaipur
                                         </a>
 
                                     </li>
                                     <li class="nav-item">
                                         <a href="faq.html" class="nav-link">
-                                            <span class="fw-bold fs-6">Jaipur</span>
+                                            Kochi
+                                        </a>
+                                    </li>
 
+                                    <li class="nav-item">
+                                        <a href="faq.html" class="nav-link">
+                                            Kolkata
                                         </a>
 
                                     </li>
                                     <li class="nav-item">
                                         <a href="faq.html" class="nav-link">
-                                            <span class="fw-bold fs-6">Kochi</span>
-
-
-                                        </a>
-
-                                    </li>
-
-                                    <li class="nav-item">
-                                        <a href="faq.html" class="nav-link">
-                                            <span class="fw-bold fs-6"> Kolkata</span>
-
-
+                                            Lucknow
                                         </a>
 
                                     </li>
                                     <li class="nav-item">
                                         <a href="faq.html" class="nav-link">
-                                            <span class="fw-bold fs-6">Lucknow</span>
-                                        </a>
-
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="faq.html" class="nav-link">
-                                            <span class="fw-bold fs-6">Mumbai
-
-                                            </span>
-
-
+                                            Mumbai
                                         </a>
 
                                     </li>
 
                                     <li class="nav-item">
                                         <a href="faq.html" class="nav-link">
-                                            <span class="fw-bold fs-6"> Srinagar
-
-                                            </span>
-
-
+                                            Srinagar
                                         </a>
-
-
                                     </li>
-
-
                                 </ul>
                             </li>
 
-
-
                             <li class="nav-item">
                                 <a href="#" class="nav-link">
-                                    <h6>
+
                                         Act & Rules
                                     <i class='bx bx-chevron-down'></i>
-                                    </h6>
+
                                 </a>
                                 <ul class="dropdown-menu">
                                     <li class="nav-item">
                                         <a href="book.html" class="nav-link">
-                                            <span class="fw-bold fs-6">AFT Act & Rules</span>
-
+                                            AFT Act & Rules
                                         </a>
                                     </li>
 
                                     <li class="nav-item">
                                         <a href="team.html" class="nav-link">
-                                            <span class="fw-bold fs-6">Army Act & Rules</span>
-
+                                            Army Act & Rules
                                         </a>
                                     </li>
                                     <li class="nav-item">
                                         <a href="faq.html" class="nav-link">
-                                            <span class="fw-bold fs-6">Air Force Act & Rules</span>
+                                            Air Force Act & Rules
 
                                         </a>
                                     </li>
 
                                     <li class="nav-item">
                                         <a href="restaurant.html" class="nav-link">
-                                            <span class="fw-bold fs-6">Navy Act & Rules</span>
-
+                                            Navy Act & Rules
                                         </a>
                                     </li>
-
-
                                 </ul>
                             </li>
 
@@ -281,12 +240,12 @@
 
                             <li class="nav-item">
                                 <a href="contact.html" class="nav-link">
-                                    <h6>Vacancies</h6>
+                                    Vacancies
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a href="contact.html" class="nav-link">
-                                    <h6>RTI</h6>
+                                    RTI
                                 </a>
                             </li>
 

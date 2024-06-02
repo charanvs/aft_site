@@ -514,8 +514,10 @@
                 '<td>' + item.regno + '</td>' +
                 '<td>' + item.year + '</td>' +
                 '<td>' + item.petitioner + '</td>' +
-                '<td><button class="btn btn-success modalData" data-id="' + item.id +
+                '<td><button class="default-btn btn-bg-one modalData" data-id="' + item.id +
                 '">View</button></td>' +
+                '<td><button class="default-btn btn-bg-two modalData" data-id="' + item.id +
+                '">PDF</button></td>' +
                 '</tr>';
               $('#dataTable tbody').append(row);
             });
@@ -533,16 +535,56 @@
                 success: function(detailData) {
                   var modalTitle = "Judgement Details"; // Set modal title
                   var modalBody = "<div class='row'>" +
-                    "<div class='col-md-12'><strong>Reg No:</strong> " + detailData.regno +
-                    "</div>" +
-                    "<div class='col-md-12'><strong>Year:</strong> " + detailData.year +
-                    "</div>" +
-                    "<div class='col-md-12'><strong>Petitioner:</strong> " + detailData
-                    .petitioner + "</div>" +
-                    "<div class='col-md-12'><strong>Mod:</strong> " + detailData.mod +
-                    "</div>" +
-                    "<div class='col-md-12'><strong>Mod:</strong> " + detailData.mod +
-                    "</div>" +
+                    "<div class='col-md-12'><h5>Reg No:</h5><h6>" + detailData.regno +
+                    "</h6></div>" +
+                    "<div class='col-md-12'><h5>Year:</h5><h6> " + detailData.year +
+                    "</h6></div>" +
+                    "<div class='col-md-12'><h5>Associated:</h5><h6> " + detailData
+                    .associated +
+                    "</h6></div>" +
+                    "<div class='col-md-12'><h5>DOR:</h5><h6> " + detailData
+                    .dor +
+                    "</h6></div>" +
+                    "<div class='col-md-12'><h5>Department:</h5><h6> " + detailData
+                    .deptt +
+                    "</h6></div>" +
+                    "<div class='col-md-12'><h5>Subject:</h5><h6> " + detailData
+                    .subject +
+                    "</h6></div>" +
+                    "<div class='col-md-12'><h5>Petitioner:</h5><h6> " + detailData
+                    .petitioner + "</h6></div>" +
+                    "<div class='col-md-12'><h5>Respondent:</h5><h6> " + detailData
+                    .respondent +
+                    "</h6></div>" +
+                    "<div class='col-md-12'><h5>Petioner Advocate:</h5><h6> " + detailData
+                    .padvocate +
+                    "</h6></div>" +
+                    "<div class='col-md-12'><h5>Respondent Advocate:</h5><h6> " + detailData
+                    .radvocate +
+                    "</h6></div>" +
+                    "<div class='col-md-12'><h5>Corum:</h5><h6> " + detailData.corum +
+                    "</h6></div>" +
+                    "<div class='col-md-12'><h5>GNO:</h5><h6> " + detailData.gno +
+                    "</h6></div>" +
+                    "<div class='col-md-12'><h5>Appeal:</h5><h6> " + detailData.appeal +
+                    "</h6></div>" +
+                    "<div class='col-md-12'><h5>JRO:</h5><h6> " + detailData.jro +
+                    "</h6></div>" +
+                    "<div class='col-md-12'><h5>Court No:</h5><h6> " + detailData.court_no +
+                    "</h6></div>" +
+                    "<div class='col-md-12'><h5>DOD:</h5><h6> " + detailData.dod +
+                    "</h6></div>" +
+                    "<div class='col-md-12'><h5>Mod:</h5><h6> " + detailData.mod +
+                    "</h6></div>" +
+                    "<div class='col-md-12'><h5>Remarks:</h5><h6> " + detailData.remarks +
+                    "</h6></div>" +
+                    "<div class='col-md-12'><h5>HeadNotes:</h5><h6> " + detailData.headnotes +
+                    "</h6></div>" +
+                    "<div class='col-md-12'><h5>Citation:</h5><h6> " + detailData.citation +
+                    "</h6></div>" +
+                    "<div class='col-md-12'><h5>Location:</h5><h6> " + detailData.location +
+                    "</h6></div>" +
+
                     "</div>"; // Adjust fields according to your data structure
 
                   // Populate modal with data

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\FrontendController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
@@ -43,6 +44,13 @@ Route::controller(JudgementController::class)->group(function () {
     Route::get('/judgements/search', 'ShowJudgements')->name('judgements.page');
     Route::get('/judgements/search/fileno', 'ShowJudgementsFileno')->name('judgements.fileno');
     Route::get('/judgements/search/show/{id}', 'ShowJudgementsData')->name('judgements.show');
+});
+
+// Judgement Routes
+Route::controller(FrontendController::class)->group(function () {
+    Route::get('/members', 'Members')->name('members.page');
+    Route::get('/daily_cause_list', 'DailyCauseList')->name('daily_cause_list.page');
+    Route::get('/vacancies', 'Vacancies')->name('vacancies.page');
 });
 
 require __DIR__ . '/auth.php';

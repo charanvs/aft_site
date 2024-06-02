@@ -465,7 +465,8 @@ Navbar Area
 .main-nav nav .navbar-nav .nav-item a {
   text-transform: capitalize;
   color: #292323;
-  font-weight: 500;
+  font-size:20px;
+  font-weight: 400;
   margin-left: 12px;
   margin-right: 12px;
 }
