@@ -100,7 +100,7 @@
                                 </a>
                                 <ul class="dropdown-menu">
                                     <li class="nav-item">
-                                        <a href="book.html" class="nav-link">
+                                        <a href="{{ route('judgements.page') }}" class="nav-link">
                                             Judgements in AFT PB
                                         </a>
                                     </li>
@@ -239,7 +239,7 @@
 
 
                             <li class="nav-item">
-                                <a href="contact.html" class="nav-link">
+                                <a href="{{ route('vacancies.page') }}" class="nav-link">
                                     Vacancies
                                 </a>
                             </li>
@@ -259,7 +259,7 @@
     <!-- End Navbar Area -->
 
     <!-- Banner Area -->
-    <div class="banner-area" style="height: 480px;">
+    <div class="banner-area" style="height: 400px;">
         <div class="container">
             <div class="banner-content">
                 <h1>AFT-PB</h1>

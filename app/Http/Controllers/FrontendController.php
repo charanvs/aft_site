@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Vacancy;
 use Illuminate\Http\Request;
 
 class FrontendController extends Controller
@@ -16,6 +17,7 @@ class FrontendController extends Controller
     }
     public function Vacancies()
     {
-        return view('frontend.recruitment');
+        $data = Vacancy::all();
+        return view('frontend.recruitment', compact('data'));
     }
 }

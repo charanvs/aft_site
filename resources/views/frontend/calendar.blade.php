@@ -14,7 +14,7 @@
     .calendar .day, .calendar .weekday {
         padding: 10px;
         border: 1px solid #ddd;
-        cursor: pointer;
+        cursor: pointer; /* Add cursor pointer to indicate clickable items */
     }
     .calendar .weekday {
         font-weight: bold;
@@ -24,23 +24,22 @@
         border: none;
     }
     .calendar .saturday, .calendar .sunday {
-        color: white;
-        background-color: #7a1921; /* Bootstrap 'danger' class color */
+        background-color: #f8d7da; /* Bootstrap 'danger' class color */
     }
     .calendar .pdf-day {
-        color: whitesmoke;
-        background-color: #347042; /* Bootstrap 'success' class color */
+        background-color: #d4edda; /* Bootstrap 'success' class color */
     }
     .calendar .holiday {
-        color: white;
-        background-color: #edb90d; /* Bootstrap 'warning' class color */
+        background-color: #fff3cd; /* Bootstrap 'warning' class color */
     }
     .month-container {
         margin-bottom: 20px;
+        border: 2px solid #ddd; /* Add border to month container */
+        border-radius: 5px; /* Optional: Add border radius for rounded corners */
+        padding: 10px; /* Optional: Add padding for better spacing */
     }
     .month-name {
         text-align: center;
-        font-weight: bold;
         font-size: 1.5em;
         margin-bottom: 10px;
     }

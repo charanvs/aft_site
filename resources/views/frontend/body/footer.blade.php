@@ -207,6 +207,9 @@
 <script src="{{ asset('frontend/assets/js/contact-form-script.js') }}"></script>
 <!-- Custom JS -->
 <script src="{{ asset('frontend/assets/js/custom.js') }}"></script>
+<script src="{{ asset('backend/new_assets/assets/plugins/datatable/js/jquery.dataTables.min.js') }}"></script>
+<script src="{{ asset('backend/new_assets/assets/plugins/datatable/js/dataTables.bootstrap5.min.js') }}"></script>
+<script src="{{ asset('backend/new_assets/') }}"></script>
 
 
 

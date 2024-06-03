@@ -42,8 +42,14 @@ Route::controller(JudgementController::class)->group(function () {
     Route::get('/cases/2020', 'ShowJudgements2020')->name('judgement2020.page');
     Route::get('/cases/2024', 'ShowJudgements2024')->name('judgement2024.page');
     Route::get('/judgements/search', 'ShowJudgements')->name('judgements.page');
-    Route::get('/judgements/search/fileno', 'ShowJudgementsFileno')->name('judgements.fileno');
+    Route::get('/judgements/search/all', 'JudgementsSearch')->name('judgements.search');
+    Route::get('/judgements/search/type/{casetype}', 'JudgementsSearchType')->name('judgements.search.type');
+    Route::get('/judgements/search/casedate/{casedate}', 'JudgementsSearchDate')->name('judgements.search.date');
+    Route::get('/judgements/search/subject/{subject}', 'JudgementsSearchSubject')->name('judgements.search.subject');
+
+    Route::get('/judgements/search/advocate/{advocate}', 'JudgementsSearchAdvocate')->name('judgements.search.advocate');
     Route::get('/judgements/search/show/{id}', 'ShowJudgementsData')->name('judgements.show');
+    Route::get('/judgements/pdf/{id}', 'ShowPdf')->name('judgements.pdf');
 });
 
 // Judgement Routes

@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Storage;
+
 use Illuminate\Http\Request;
 use App\Models\Judgement;
 
@@ -19,21 +21,75 @@ class JudgementController extends Controller
         return view('frontend.judgement2015', compact('judgements2015'));
     } // end mehtod
 
-    public function ShowJudgementsFileno(Request $request)
+    public function JudgementsSearch(Request $request)
     {
-        $fileno = $request->input('fileno');
-        $year = $request->input('year');
-        $data = Judgement::where('file_no', '=', $fileno)->where('year', '=', $year)->get();
+        if ($request->input('fileno') && $request->input('year')) {
+            $fileno = $request->input('fileno');
+            $year = $request->input('year');
+            $data = Judgement::where('file_no', '=', $fileno)->where('year', '=', $year)->get();
+        } else if ($request->input('partyname')) {
+            $partyname = $request->input('partyname');
+            $data = Judgement::where('petitioner', 'like', '%' . $partyname . '%')->get();
+        } else if ($request->input('padvocatename') or $request->input('radvocatename')) {
+            $padvocatename = $request->input('padvocatename');
+            $radvocatename = $request->input('radvocatename');
+
+            if ($padvocatename) {
+                $data = Judgement::where('padvocate', 'like', '%' . $padvocatename . '%')->get();
+            }
+            if ($radvocatename) {
+                $data = Judgement::where('radvocate', 'like', '%' . $radvocatename . '%')->get();
+            }
+        } else if ($request->input('casetype')) {
+            $casetype = $request->input('casetype');
+
+            $data = Judgement::where('case_type', $casetype)->paginate(10);
+        }
+        return response()->json($data);
+    } // end mehtod
+
+    public function JudgementsSearchType($casetype)
+    {
+
+        $data = Judgement::where('case_type',  $casetype)->paginate(10);
+        return response()->json($data);
+    } // end mehtod
+
+    public function JudgementsSearchAdvocate($advocate)
+    {
+        $data = Judgement::where('padvocate', 'like', '%' . $advocate . '%')->orWhere('radvocate', 'like', '%' . $advocate . '%')->paginate(10);
+        return response()->json($data);
+    } // end mehtod
+
+    public function JudgementsSearchDate($casedate)
+    {
+
+        $data = Judgement::where('dod', '=',  $casedate)->paginate(10);
+        // $query = Judgement::where('dod', $casedate);
+
+        // dd($query->toSql(), $query->getBindings());
 
         return response()->json($data);
-        // $file_no = $request->fileno;
-        // $year = $request->year;
-
-        // $judgements = Judgement::latest()->select('case_type', 'file_no', 'year', 'petitioner', 'mod', 'dod', 'padvocate', 'radvocate')->where('file_no', '=', $file_no)->where('year', '=', $year)->get();
-        // return view('frontend.judgements.judgementssearch', compact('judgements'));
-        // $data = Judgement::select('case_type', 'file_no', 'year', 'petitioner', 'mod', 'dod', 'padvocate', 'radvocate')->where('file_no', '=', '25')->get(); // Fetch your data using Eloquent or any other method
-        // return response()->json($data);
     } // end mehtod
+
+    public function JudgementsSearchSubject($subject)
+    {
+        $data = Judgement::where('subject', 'like', '%' . $subject . '%')->paginate(10);
+        return response()->json($data);
+    } // end mehtod
+
+    public function showPdf($id)
+    {
+        // Retrieve the judgement from the database
+        $judgement = Judgement::findOrFail($id);
+
+        // Get the PDF file path or URL
+        // $pdfPath = $judgement->pdf_path;
+        $pdfPath = "pdf/sample.pdf";
+
+        // Serve the PDF file
+        return response()->file(storage_path('app/public/' . $pdfPath));
+    }
 
     public function ShowJudgementsData($id)
     {
