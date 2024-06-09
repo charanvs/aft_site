@@ -2,14 +2,20 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Team;
 use App\Models\Vacancy;
 use Illuminate\Http\Request;
 
 class FrontendController extends Controller
 {
+    public function Home()
+    {
+        return view('frontend.index');
+    }
     public function Members()
     {
-        return view('frontend.team');
+        $data = Team::all();
+        return view('frontend.team', compact('data'));
     }
     public function DailyCauseList()
     {

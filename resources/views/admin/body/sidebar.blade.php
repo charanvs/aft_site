@@ -1,121 +1,53 @@
-<div class="vertical-menu">
-
-    <div data-simplebar class="h-100">
-
-        <!-- User details -->
-
-
-        <!--- Sidemenu -->
-        <div id="sidebar-menu">
-            <!-- Left Menu Start -->
-            <ul class="metismenu list-unstyled" id="side-menu">
-                <li class="menu-title">Menu</li>
-
-                <li>
-                    <a href="index.html" class="waves-effect">
-                        <i class="ri-dashboard-line"></i><span class="badge rounded-pill bg-success float-end">3</span>
-                        <span>Dashboard</span>
-                    </a>
-                </li>
-
-
-
-<li>
-<a href="javascript: void(0);" class="has-arrow waves-effect">
-    <i class="ri-mail-send-line"></i>
-    <span>Home Slide Setup</span>
-</a>
-<ul class="sub-menu" aria-expanded="false">
-    <li><a href="">Home Slide</a></li>
-
-</ul>
-</li>
-
-
-<li>
-<a href="javascript: void(0);" class="has-arrow waves-effect">
-    <i class="ri-mail-send-line"></i>
-    <span>About Page Setup</span>
-</a>
-<ul class="sub-menu" aria-expanded="false">
-    <li><a href="">About Page</a></li>
-  <li><a href="">About Multi Image</a></li>
-  <li><a href="">All Multi Image</a></li>
-</ul>
-</li>
-
-
-<li>
-<a href="javascript: void(0);" class="has-arrow waves-effect">
-<i class="ri-mail-send-line"></i>
-<span>Portfolio Page Setup</span>
-</a>
-<ul class="sub-menu" aria-expanded="false">
-<li><a href="">All Portfolio</a></li>
-<li><a href="">Add Portfolio</a></li>
-
-</ul>
-</li>
-
-
-
-                <li class="menu-title">Pages</li>
-
-<li>
-<a href="javascript: void(0);" class="has-arrow waves-effect">
-<i class="ri-account-circle-line"></i>
-<span>Blog Category</span>
-</a>
-<ul class="sub-menu" aria-expanded="false">
-<li><a href="">All Blog Category</a></li>
-<li><a href="">Add Blog Category</a></li>
-</ul>
-</li>
-
-<li>
-    <a href="javascript: void(0);" class="has-arrow waves-effect">
-        <i class="ri-profile-line"></i>
-        <span>Blog Page</span>
-    </a>
-    <ul class="sub-menu" aria-expanded="false">
-        <li><a href="">All Blog</a></li>
-        <li><a href="">Add Blog</a></li>
-
-    </ul>
-</li>
-
-
-<li>
-    <a href="javascript: void(0);" class="has-arrow waves-effect">
-        <i class="ri-profile-line"></i>
-        <span>Footer Page Setup</span>
-    </a>
-    <ul class="sub-menu" aria-expanded="false">
-        <li><a href="">Footer Setup</a></li>
-
-
-    </ul>
-</li>
-
-
-<li>
-    <a href="javascript: void(0);" class="has-arrow waves-effect">
-        <i class="ri-profile-line"></i>
-        <span>Contact Message </span>
-    </a>
-    <ul class="sub-menu" aria-expanded="false">
-        <li><a href="">Contact Message</a></li>
-
-
-    </ul>
-</li>
-
-
-
-
-
-            </ul>
-        </div>
-        <!-- Sidebar -->
+<div class="sidebar-wrapper" data-simplebar="true">
+    <div class="sidebar-header">
+      <div>
+        <img src="{{ asset('backend/assets/images/logo-icon.png') }}" class="logo-icon" alt="logo icon">
+      </div>
+      <div>
+        <h4 class="logo-text">Rocker</h4>
+      </div>
+      <div class="toggle-icon ms-auto"><i class='bx bx-arrow-back'></i>
+      </div>
     </div>
-</div>
+    <!--navigation-->
+    <ul class="metismenu" id="menu">
+      <li>
+        <a href="javascript:;" class="has-arrow">
+          <div class="parent-icon"><i class='bx bx-home-alt'></i>
+          </div>
+          <div class="menu-title">Dashboard</div>
+        </a>
+        <ul>
+          <li> <a href="index.html"><i class='bx bx-radio-circle'></i>Default</a>
+          </li>
+          <li> <a href="index2.html"><i class='bx bx-radio-circle'></i>Alternate</a>
+          </li>
+          <li> <a href="index3.html"><i class='bx bx-radio-circle'></i>Graphical</a>
+          </li>
+        </ul>
+      </li>
+      <li>
+        <a href="javascript:;" class="has-arrow">
+          <div class="parent-icon"><i class="bx bx-category"></i>
+          </div>
+          <div class="menu-title">Manage Teams</div>
+        </a>
+        <ul>
+          <li> <a href="{{ route('all.team') }}"><i class='bx bx-radio-circle'></i>All Team</a>
+          </li>
+          <li> <a href="{{ route('add.team') }}"><i class='bx bx-radio-circle'></i>Add Team</a>
+          </li>
+
+        </ul>
+      </li>
+      <li class="menu-label">UI Elements</li>
+      <li>
+        <a href="widgets.html">
+          <div class="parent-icon"><i class='bx bx-cookie'></i>
+          </div>
+          <div class="menu-title">widgets</div>
+        </a>
+      </li>
+
+    <!--end navigation-->
+  </div>

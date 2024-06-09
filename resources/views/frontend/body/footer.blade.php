@@ -207,10 +207,27 @@
 <script src="{{ asset('frontend/assets/js/contact-form-script.js') }}"></script>
 <!-- Custom JS -->
 <script src="{{ asset('frontend/assets/js/custom.js') }}"></script>
-<script src="{{ asset('backend/new_assets/assets/plugins/datatable/js/jquery.dataTables.min.js') }}"></script>
-<script src="{{ asset('backend/new_assets/assets/plugins/datatable/js/dataTables.bootstrap5.min.js') }}"></script>
-<script src="{{ asset('backend/new_assets/') }}"></script>
+<script src="{{ asset('backend/assets/plugins/datatable/js/jquery.dataTables.min.js') }}"></script>
+<script src="{{ asset('backend/assets/plugins/datatable/js/dataTables.bootstrap5.min.js') }}"></script>
 
+<script>
+    $(document).ready(function() {
+        $('#example').DataTable();
+      } );
+</script>
+<script>
+    $(document).ready(function() {
+        var table = $('#example2').DataTable( {
+            lengthChange: false,
+            buttons: [ 'copy', 'excel', 'pdf', 'print']
+        } );
+
+        table.buttons().container()
+            .appendTo( '#example2_wrapper .col-md-6:eq(0)' );
+    } );
+</script>
+<!--app JS-->
+<script src="{{ asset('backend/assets/js/app.js') }}"></script>
 
 
 </body>

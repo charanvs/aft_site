@@ -4,6 +4,7 @@
   AFT-PB | Members
 @endsection
 @include('frontend.body.header')
+
 <style>
     .calendar {
         display: grid;
@@ -18,19 +19,19 @@
     }
     .calendar .weekday {
         font-weight: bold;
-        background-color: #f1f1f1;
+        background-color: #E6E6FA;
     }
     .calendar .empty {
         border: none;
     }
     .calendar .saturday, .calendar .sunday {
-        background-color: #f8d7da; /* Bootstrap 'danger' class color */
+        background-color: #E6E6FA; /* Bootstrap 'danger' class color */
     }
     .calendar .pdf-day {
-        background-color: #d4edda; /* Bootstrap 'success' class color */
+        background-color: #40E0D0; /* Bootstrap 'success' class color */
     }
     .calendar .holiday {
-        background-color: #fff3cd; /* Bootstrap 'warning' class color */
+        background-color: #FFD700; /* Bootstrap 'warning' class color */
     }
     .month-container {
         margin-bottom: 20px;
@@ -42,6 +43,7 @@
         text-align: center;
         font-size: 1.5em;
         margin-bottom: 10px;
+       background-color: #FFD700;
     }
     .row-cols-3 > .col {
         display: flex;
@@ -52,6 +54,8 @@
 <div class="container">
     <div class="row row-cols-1 row-cols-md-3" id="calendar-container"></div>
 </div>
+
+
 
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script src="{{ asset('frontend/assets/js/calendar.js') }}"></script>

@@ -26,6 +26,8 @@ class AdminController extends Controller
     } // End Method
 
 
+
+
     public function Profile()
     {
         $id = Auth::user()->id;

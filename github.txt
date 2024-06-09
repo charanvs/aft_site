@@ -9,3 +9,7 @@ git push -u origin main
 git remote add origin https://github.com/charanvs/aft_site.git
 git branch -M main
 git push -u origin main
+
+git add .
+git commit -m "dated 03-06-2024 9.30PM"
+git push -u origin main

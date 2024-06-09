@@ -1,11 +1,13 @@
 <?php
 
+use App\Http\Controllers\Backend\TeamController;
 use App\Http\Controllers\FrontendController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Home\HomeSliderController;
 use App\Http\Controllers\JudgementController;
+use App\Http\Controllers\File\FileController;
 
 Route::get('/', function () {
     return view('frontend.index');
@@ -15,11 +17,6 @@ Route::get('/dashboard', function () {
     return view('admin.index');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-// Route::middleware('auth')->group(function () {
-//     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-//     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-//     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-// });
 
 // Admin All Route
 Route::middleware(['auth'])->group(function () {
@@ -50,13 +47,29 @@ Route::controller(JudgementController::class)->group(function () {
     Route::get('/judgements/search/advocate/{advocate}', 'JudgementsSearchAdvocate')->name('judgements.search.advocate');
     Route::get('/judgements/search/show/{id}', 'ShowJudgementsData')->name('judgements.show');
     Route::get('/judgements/pdf/{id}', 'ShowPdf')->name('judgements.pdf');
+    Route::get('/judgements/reportable', 'ReportableJudgements')->name('judgements.reportable');
+    Route::get('/judgements/large/bench', 'LargeBenchJudgements')->name('judgements.largebench');
 });
 
 // Judgement Routes
 Route::controller(FrontendController::class)->group(function () {
+    Route::get('/home', 'Home')->name('home');
     Route::get('/members', 'Members')->name('members.page');
     Route::get('/daily_cause_list', 'DailyCauseList')->name('daily_cause_list.page');
     Route::get('/vacancies', 'Vacancies')->name('vacancies.page');
 });
 
+Route::middleware(['auth'])->group(function () {
+    Route::controller(TeamController::class)->group(function () {
+        Route::get('/all/team', 'AllTeam')->name('all.team');
+        Route::get('/add/team', 'AddTeam')->name('add.team');
+        Route::post('/team/store', 'StoreTeam')->name('team.store');
+        Route::get('/edit/team/{id}', 'EditTeam')->name('edit.team');
+        Route::post('/team/update', 'UpdateTeam')->name('team.update');
+    });
+});
+
 require __DIR__ . '/auth.php';
+
+Route::get('/standardize-filenames', [FileController::class, 'standardizeFilenames']);
+Route::get('/file/name/change', [FileController::class, 'FileNameChange']);
