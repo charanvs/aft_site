@@ -8,6 +8,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Home\HomeSliderController;
 use App\Http\Controllers\JudgementController;
 use App\Http\Controllers\File\FileController;
+use App\Http\Controllers\cases\CaseManagementController;
 
 Route::get('/', function () {
     return view('frontend.index');
@@ -35,23 +36,32 @@ Route::middleware(['auth'])->group(function () {
 
 // Judgement Routes
 Route::controller(JudgementController::class)->group(function () {
-    Route::get('/cases/2015', 'ShowJudgements2015')->name('judgement2015.page');
-    Route::get('/cases/2020', 'ShowJudgements2020')->name('judgement2020.page');
-    Route::get('/cases/2024', 'ShowJudgements2024')->name('judgement2024.page');
+    // Route::get('/cases/2015', 'ShowJudgements2015')->name('judgement2015.page');
+    // Route::get('/cases/2020', 'ShowJudgements2020')->name('judgement2020.page');
+    // Route::get('/cases/2024', 'ShowJudgements2024')->name('judgement2024.page');
     Route::get('/judgements/search', 'ShowJudgements')->name('judgements.page');
-    Route::get('/judgements/search/all', 'JudgementsSearch')->name('judgements.search');
-    Route::get('/judgements/search/type/{casetype}', 'JudgementsSearchType')->name('judgements.search.type');
-    Route::get('/judgements/search/casedate/{casedate}', 'JudgementsSearchDate')->name('judgements.search.date');
-    Route::get('/judgements/search/subject/{subject}', 'JudgementsSearchSubject')->name('judgements.search.subject');
+    Route::get('/judgements/search/all', 'JudgementsSearch')->name('judgements.search.all');
+    // Route::get('/judgements/search/type/{casetype}', 'JudgementsSearchType')->name('judgements.search.type');
+    // Route::get('/judgements/search/casedate/{casedate}', 'JudgementsSearchDate')->name('judgements.search.date');
+    // Route::get('/judgements/search/subject/{subject}', 'JudgementsSearchSubject')->name('judgements.search.subject');
 
-    Route::get('/judgements/search/advocate/{advocate}', 'JudgementsSearchAdvocate')->name('judgements.search.advocate');
+    // Route::get('/judgements/search/advocate/{advocate}', 'JudgementsSearchAdvocate')->name('judgements.search.advocate');
     Route::get('/judgements/search/show/{id}', 'ShowJudgementsData')->name('judgements.show');
     Route::get('/judgements/pdf/{id}', 'ShowPdf')->name('judgements.pdf');
     Route::get('/judgements/reportable', 'ReportableJudgements')->name('judgements.reportable');
     Route::get('/judgements/large/bench', 'LargeBenchJudgements')->name('judgements.largebench');
 });
 
-// Judgement Routes
+// Case Management Routes
+Route::controller(CaseManagementController::class)->group(function () {
+    Route::get('/show/cases', 'ShowCases')->name('cases.page');
+    Route::get('/search/case', 'CaseSearch')->name('cases.search');
+    Route::get('/cases/search/show/{id}', 'ShowCasesData')->name('case.fileno.search');
+    Route::get('/cases/search/advocate/{advocate}', 'ShowCasesAdvocate')->name('case.advocate.search');
+    Route::get('/cases/search/casetype/{casetype}', 'ShowCasesType')->name('case.type.search');
+});
+
+// Frontend Routes
 Route::controller(FrontendController::class)->group(function () {
     Route::get('/home', 'Home')->name('home');
     Route::get('/members', 'Members')->name('members.page');

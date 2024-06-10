@@ -447,7 +447,7 @@ Navbar Area
 
 .main-nav {
   position: inherit;
-  background-color: #ffffff;
+  background-color: #17a2b8;
   top: 0;
   left: 0;
   z-index: inherit;
@@ -462,12 +462,12 @@ Navbar Area
 }
 
 .main-nav nav .navbar-nav .nav-item:hover a, .main-nav nav .navbar-nav .nav-item .active {
-  color: #B56952 !important;
+  color: #ffc107 !important;
 }
 
 .main-nav nav .navbar-nav .nav-item a {
   text-transform: capitalize;
-  color: #292323;
+  color: white;
   font-size:20px;
   font-weight: 400;
   margin-left: 12px;
@@ -483,11 +483,11 @@ Navbar Area
 }
 
 .main-nav nav .navbar-nav .nav-item a:hover, .main-nav nav .navbar-nav .nav-item a :focus {
-  color: #B56952 !important;
+  color: #ffc107 !important;
 }
 
 .main-nav nav .navbar-nav .nav-item a.active {
-  color: #B56952 !important;
+  color: #ffc107 !important;
 }
 
 .main-nav nav .navbar-nav .nav-item a .active::before {

@@ -4,11 +4,10 @@
   AFT-PB | Judgements
 @endsection
 @include('frontend.body.header')
+
 <style>
-  /* Custom CSS for spacing between buttons */
   .btn-spacing {
     margin-right: 10px;
-    /* Adjust this value to your desired spacing */
   }
 
   .index-cell,
@@ -35,57 +34,28 @@
   }
 </style>
 
-
 <div class="reservation-widget-area pt-60 pb-70">
   <div class="container ml-5">
     <div class="tab reservation-tab ml-5">
       <ul class="tabs">
+        @foreach (['File Number', 'Party Name', 'Advocate Name', 'Case Type', 'Date', 'Subject'] as $tab)
         <li>
-          <a href="#" class="default-btn btn-bg-four border-radius-5 btn-spacing"><span class="text-white h6">File
-              Number</span></a>
+          <a href="#" class="default-btn btn-bg-four border-radius-5 btn-spacing">
+            <span class="text-white h6">{{ $tab }}</span>
+          </a>
         </li>
-
-        <li>
-          <a href="#" class="default-btn btn-bg-four border-radius-5 btn-spacing"><span class="text-white h6">Party
-              Name</span></a>
-
-        </li>
-
-        <li>
-          <a href="#" class="default-btn btn-bg-four border-radius-5 btn-spacing"><span
-              class="text-white h6">Advocate
-              Name</span></a>
-
-        </li>
-
-        <li>
-          <a href="#" class="default-btn btn-bg-four border-radius-5 btn-spacing"><span class="text-white h6">Case
-              Type</span></a>
-
-        </li>
-
-        <li>
-          <a href="#" class="default-btn btn-bg-four border-radius-5 btn-spacing"><span
-              class="text-white h6">Date</span></a>
-
-        </li>
-        <li>
-          <a href="#" class="default-btn btn-bg-four border-radius-5 btn-spacing"><span
-              class="text-white h6">Subject</span></a>
-
-        </li>
-
+        @endforeach
       </ul>
 
       <div class="tab_content current active pt-45">
-        <div class="tabs_item current">
+        @foreach (['File Number', 'Party Name', 'Advocate', 'Case Type', 'Date', 'Subject'] as $key => $searchBy)
+        <div class="tabs_item {{ $key === 0 ? 'current' : '' }}">
           <div class="reservation-tab-item">
             <div class="row">
-              <div class="col-lg-4">
+              <div class="col-lg-{{ $searchBy === 'Advocate' ? '3' : '4' }}">
                 <div class="side-bar-form">
-                  <h3>Search By - File
-                    Number </h3>
-                  <form method="get" action="{{ route('judgements.page') }}">
+                  <h3>Search By - {{ $searchBy }}</h3>
+                  <form method="get" action="{{ in_array($searchBy, ['File Number', 'Date', 'Subject']) ? route('judgements.page') : '#' }}">
                     <div class="row align-items-center">
                       <div class="col-lg-12">
                         <div class="form-group">
@@ -93,9 +63,7 @@
                             <h5>Select Bench</h5>
                           </label>
                           <select class="form-control">
-                            <option>
-                              <h6>Principal Bench</h6>
-                            </option>
+                            <option>Principal Bench</option>
                             <option>Chandigarh</option>
                             <option>Chennai</option>
                             <option>Guwhati</option>
@@ -103,6 +71,7 @@
                           </select>
                         </div>
                       </div>
+                      @if ($searchBy === 'File Number')
                       <div class="col-lg-12">
                         <div class="form-group">
                           <label class="h5">File No</label>
@@ -123,191 +92,29 @@
                           <i class='bx bx-calendar-check'></i>
                         </div>
                       </div>
-
-                      <div class="col-lg-12 col-md-12">
-                        <button id="filterButtonFile" type="button" class="default-btn btn-bg-three border-radius-5">
-                          Search
-                        </button>
-                      </div>
-                    </div>
-                  </form>
-                </div>
-              </div>
-
-              <div class="col-lg-8">
-                <div class="reservation-widget-content">
-                  <h2>Details of Judgements - File No</h2>
-                  <hr>
-                  <table id="dataTableFile" class="table">
-                    <!-- Table headers -->
-                    <thead>
-
-                      <!-- Table Head where data will be displayed -->
-
-                    </thead>
-                    <!-- Table body where data will be displayed -->
-                    <tbody>
-                      <!-- Table rows will be populated dynamically -->
-                    </tbody>
-
-                  </table>
-
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="tabs_item">
-          <div class="reservation-tab-item">
-            <div class="row">
-              <div class="col-lg-4">
-                <div class="side-bar-form">
-                  <h3>Search By - Party Name</h3>
-                  <form method="get" action="#">
-                    <div class="row align-items-center">
+                      @elseif ($searchBy === 'Date')
                       <div class="col-lg-12">
                         <div class="form-group">
-                          <label>
-                            <h5>Select Bench</h5>
-                          </label>
-                          <select class="form-control">
-                            <option>Principal Bench</option>
-                            <option>Chandigarh</option>
-                            <option>Chennai</option>
-                            <option>Guwhati</option>
-                            <option>Kolkata</option>
-                          </select>
-                        </div>
-                      </div>
-                      <div class="col-lg-12">
-                        <div class="form-group">
-                          <label>Party Name</label>
+                          <label class="h5">Date</label>
                           <div class="input-group">
-                            <input type="text" class="form-control" placeholder="Party Name" id="partyname">
+                            <input type="date" class="form-control" placeholder="Date" id="casedate">
                             <span class="input-group-addon"></span>
                           </div>
-                          <i class='bx bx-rename'></i>
+                          <i class='bx bx-calendar'></i>
                         </div>
                       </div>
-
-                      <div class="col-lg-12 col-md-12">
-                        <button id="filterButtonParty" type="button" class="default-btn btn-bg-three border-radius-5">
-                          Search
-                        </button>
-                      </div>
-                    </div>
-                  </form>
-                </div>
-              </div>
-
-              <div class="col-lg-8">
-                <div class="reservation-widget-content">
-                  <h2>Details of Judgements - Party Name</h2>
-                  <table id="dataTableParty" class="table">
-                    <!-- Table headers -->
-                    <thead>
-                      <!-- Table Header from script will be displayed -->
-                    </thead>
-                    <!-- Table body where data will be displayed -->
-                    <tbody>
-                      <!-- Table rows will be populated dynamically -->
-                    </tbody>
-                  </table>
-
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="tabs_item">
-          <div class="reservation-tab-item">
-            <div class="row">
-              <div class="col-lg-3">
-                <div class="side-bar-form">
-                  <h3>Search By - Advocate </h3>
-                  <form method="get" action="#">
-                    <div class="row align-items-center">
+                      @elseif ($searchBy !== 'Case Type')
                       <div class="col-lg-12">
                         <div class="form-group">
-                          <label>Select Bench</label>
-                          <select class="form-control">
-                            <option>Principal Bench</option>
-                            <option>Chandigarh</option>
-                            <option>Chennai</option>
-                            <option>Guwhati</option>
-                            <option>Kolkata</option>
-                          </select>
-                        </div>
-                      </div>
-                      <div class="col-lg-12">
-                        <div class="form-group">
-                          <label>Advocate Name</label>
+                          <label class="h5">{{ $searchBy }}</label>
                           <div class="input-group">
-                            <input type="text" class="form-control" placeholder="Enter Advocate Name"
-                              id="advocate">
+                            <input type="text" class="form-control" placeholder="{{ $searchBy }}" id="{{ strtolower(str_replace(' ', '', $searchBy)) }}">
                             <span class="input-group-addon"></span>
                           </div>
-                          <i class='bx bx-user-pin'></i>
+                          <i class='bx {{ $searchBy === 'File Number' ? 'bx-file-blank' : ($searchBy === 'Party Name' ? 'bx-rename' : ($searchBy === 'Advocate' ? 'bx-user-pin' : 'bx-calendar-check')) }}'></i>
                         </div>
                       </div>
-
-
-                      <div class="col-lg-12 col-md-12">
-                        <button id="filterButtonAdvocate" type="button"
-                          class="default-btn btn-bg-three border-radius-5">
-                          Search
-                        </button>
-                      </div>
-                    </div>
-                  </form>
-                </div>
-              </div>
-
-              <div class="col-lg-9">
-                <div class="reservation-widget-content">
-                  <h2>Cases - Advocate</h2>
-                  <table id="dataTableAdvocate" class="table">
-                    <!-- Table headers -->
-                    <thead>
-                      <!-- data from jquery -->
-                    </thead>
-                    <!-- Table body where data will be displayed -->
-                    <tbody>
-                      <!-- Table rows will be populated dynamically -->
-                    </tbody>
-                  </table>
-                  <nav aria-label="Page navigation example">
-                    <ul class="pagination" id="paginationLinks"></ul>
-                  </nav>
-
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="tabs_item">
-          <div class="reservation-tab-item">
-            <div class="row">
-              <div class="col-lg-4">
-                <div class="side-bar-form">
-                  <h3>Search By - Case Type </h3>
-                  <form method="get" action="">
-                    <div class="row align-items-center">
-                      <div class="col-lg-12">
-                        <div class="form-group">
-                          <label>Select Bench</label>
-                          <select class="form-control">
-                            <option>Principal Bench</option>
-                            <option>Chandigarh</option>
-                            <option>Chennai</option>
-                            <option>Guwhati</option>
-                            <option>Kolkata</option>
-                          </select>
-                        </div>
-                      </div>
+                      @else
                       <div class="col-lg-12">
                         <div class="form-group">
                           <label>Select Case Type</label>
@@ -322,11 +129,10 @@
                           <i class='bx bx-search-alt'></i>
                         </div>
                       </div>
-
+                      @endif
                       <div class="col-lg-12 col-md-12">
-                        <button id="filterButtonCasetype" type="button"
-                          class="default-btn btn-bg-three border-radius-5">
-                          Search Case Type
+                        <button id="filterButton{{ str_replace(' ', '', $searchBy) }}" type="button" class="default-btn btn-bg-three border-radius-5">
+                          Search {{ str_replace(' ', '', $searchBy) }}
                         </button>
                       </div>
                     </div>
@@ -334,166 +140,29 @@
                 </div>
               </div>
 
-              <div class="col-lg-8">
+              <div class="col-lg-{{ $searchBy === 'Advocate' ? '9' : '8' }}">
                 <div class="reservation-widget-content">
-                  <h2>Cases - Type</h2>
-                  <table id="dataTableCasetype" class="table">
-                    <!-- Table headers -->
-                    <thead>
-
-                    </thead>
-                    <!-- Table body where data will be displayed -->
-                    <tbody>
-                      <!-- Table rows will be populated dynamically -->
-                    </tbody>
+                  <h2>Details of Judgements - {{ $searchBy }}</h2>
+                  <hr>
+                  <table id="dataTable{{ str_replace(' ', '', $searchBy) }}" class="table bg-secondary text-white">
+                    <thead></thead>
+                    <tbody></tbody>
                   </table>
                   <nav aria-label="Page navigation example">
-                    <ul class="pagination" id="paginationLinksCasetype"></ul>
+                    <ul class="pagination" id="paginationLinks{{ str_replace(' ', '', $searchBy) }}"></ul>
                   </nav>
-
                 </div>
               </div>
             </div>
           </div>
         </div>
-
-        <div class="tabs_item">
-          <div class="reservation-tab-item">
-            <div class="row">
-              <div class="col-lg-4">
-                <div class="side-bar-form">
-                  <h3>Search By - Date </h3>
-                  <form method="get" action="{{ route('judgements.page') }}">
-                    <div class="row align-items-center">
-                      <div class="col-lg-12">
-                        <div class="form-group">
-                          <label>Select Bench</label>
-                          <select class="form-control">
-                            <option>Principal Bench</option>
-                            <option>Chandigarh</option>
-                            <option>Chennai</option>
-                            <option>Guwhati</option>
-                            <option>Kolkata</option>
-                          </select>
-                        </div>
-                      </div>
-                      <div class="col-lg-12">
-                        <div class="form-group">
-                          <label>Date</label>
-                          <div class="input-group">
-                            <input type="date" class="form-control" placeholder="Date" id="casedate">
-                            <span class="input-group-addon"></span>
-                          </div>
-                          <i class='bx file-search'></i>
-                        </div>
-                      </div>
-
-                      <div class="col-lg-12 col-md-12">
-                        <button id="filterButtonCaseDate" type="button"
-                          class="default-btn btn-bg-three border-radius-5">
-                          Search
-                        </button>
-                      </div>
-                    </div>
-                  </form>
-                </div>
-              </div>
-
-              <div class="col-lg-8">
-                <div class="reservation-widget-content">
-                  <h2>Cases - Date</h2>
-                  <table id="dataTableCaseDate" class="table">
-                    <!-- Table headers -->
-                    <thead>
-                      <!-- Header data  -->
-                    </thead>
-                    <!-- Table body where data will be displayed -->
-                    <tbody>
-                      <!-- Table rows will be populated dynamically -->
-                    </tbody>
-                  </table>
-                  <nav aria-label="Page navigation example">
-                    <ul class="pagination" id="paginationLinksCaseDate"></ul>
-                  </nav>
-
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="tabs_item">
-          <div class="reservation-tab-item">
-            <div class="row">
-              <div class="col-lg-4">
-                <div class="side-bar-form">
-                  <h3>Search By - Subject </h3>
-                  <form method="get" action="{{ route('judgements.page') }}">
-                    <div class="row align-items-center">
-                      <div class="col-lg-12">
-                        <div class="form-group">
-                          <label>Select Bench</label>
-                          <select class="form-control">
-                            <option>Principal Bench</option>
-                            <option>Chandigarh</option>
-                            <option>Chennai</option>
-                            <option>Guwhati</option>
-                            <option>Kolkata</option>
-                          </select>
-                        </div>
-                      </div>
-                      <div class="col-lg-12">
-                        <div class="form-group">
-                          <label>Subject</label>
-                          <div class="input-group">
-                            <input type="text" class="form-control" placeholder="Enter Subject" id="subject">
-                            <span class="input-group-addon"></span>
-                          </div>
-                          <i class='bx bx-book-content'></i>
-                        </div>
-                      </div>
-
-                      <div class="col-lg-12 col-md-12">
-                        <button id="filterButtonSubject" type="button"
-                          class="default-btn btn-bg-three border-radius-5">
-                          Search Subject
-                        </button>
-                      </div>
-                    </div>
-                  </form>
-                </div>
-              </div>
-
-              <div class="col-lg-8">
-                <div class="reservation-widget-content">
-                  <h2>Cases - Subject</h2>
-                  <table id="dataTableSubject" class="table">
-                    <!-- Table headers -->
-                    <thead>
-                      <!-- Header data  -->
-                    </thead>
-                    <!-- Table body where data will be displayed -->
-                    <tbody>
-                      <!-- Table rows will be populated dynamically -->
-                    </tbody>
-                  </table>
-                  <nav aria-label="Page navigation example">
-                    <ul class="pagination" id="paginationLinksSubject"></ul>
-                  </nav>
-
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-
+        @endforeach
       </div>
     </div>
   </div>
 </div>
 
-<!-- Modal HTML -->
+<!-- Modals -->
 <div class="modal fade" id="myModal" tabindex="-1" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
@@ -502,7 +171,6 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <!-- Modal Body Content -->
         <p>Modal body content goes here.</p>
       </div>
       <div class="modal-footer">
@@ -512,29 +180,24 @@
   </div>
 </div>
 
-<!-- Modal HTML for PDF display -->
 <div class="modal fade" id="myModalPDF" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="myModalLabel">Modal title</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <!-- Modal Body Content -->
-
-          <p>Modal body content goes here.</p>
-        </div>
-        <div class="modal-footer" id="modal_footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        </div>
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="myModalLabel">Modal title</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p>Modal body content goes here.</p>
+      </div>
+      <div class="modal-footer" id="modal_footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
       </div>
     </div>
   </div>
+</div>
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
 <script src="{{ asset('frontend/assets/js/mytabs.js') }}"></script>
-
 
 @endsection

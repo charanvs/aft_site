@@ -23,15 +23,40 @@ class JudgementController extends Controller
 
     public function JudgementsSearch(Request $request)
     {
-        if ($request->input('fileno') && $request->input('year')) {
-            $fileno = $request->input('fileno');
-            $year = $request->input('year');
-            $data = Judgement::where('file_no', '=', $fileno)->where('year', '=', $year)->get();
-        } else if ($request->input('partyname')) {
-            $partyname = $request->input('partyname');
-            $data = Judgement::where('petitioner', 'like', '%' . $partyname . '%')->get();
+        $query = Judgement::query();
+
+        if ($request->has('fileno') && $request->has('year')) {
+            $query->where('file_no', $request->fileno)->where('year', $request->year);
         }
-        return response()->json($data);
+
+        if ($request->has('partyname')) {
+            $query->where('petitioner', 'LIKE', '%' . $request->partyname . '%');
+        }
+
+        if ($request->has('advocate')) {
+            $query->where('padvocate', 'LIKE', '%' . $request->advocate . '%')->orWhere('radvocate', 'LIKE', '%' . $request->advocate . '%');
+        }
+
+        if ($request->has('casetype')) {
+            $query->where('case_type', $request->casetype);
+        }
+
+        if ($request->has('casedate')) {
+            $query->where('dod', $request->casedate);
+        }
+
+        if ($request->has('subject')) {
+            $query->where('subject', 'LIKE', '%' . $request->subject . '%');
+        }
+
+        $judgements = $query->paginate(10);
+
+        // return response()->json([
+        //     'data' => $judgements->items(),
+        //     'links' => $judgements->links('pagination::bootstrap-4')->toHtml(),
+        //     'from' => $judgements->firstItem(),
+        // ]);
+        return response()->json($judgements);
     } // end mehtod
 
     public function JudgementsSearchType($casetype)
@@ -74,7 +99,23 @@ class JudgementController extends Controller
 
     public function ShowJudgementsData($id)
     {
-        $data = Judgement::findOrFail($id);
+        $judgement = Judgement::findOrFail($id);
+
+        // Adjust this part according to your actual database structure
+        $data = [
+            'regno' => $judgement->reg_no,
+            'year' => $judgement->year,
+            'deptt' => $judgement->department,
+            'associated' => $judgement->associated,
+            'dor' => $judgement->dor,
+            'padvocate' => $judgement->petitioner_advocate,
+            'radvocate' => $judgement->respondent_advocate,
+            'subject' => $judgement->subject,
+            'petitioner' => $judgement->petitioner,
+            'court_no' => $judgement->court_no,
+            'remarks' => $judgement->remarks,
+            'pdfUrl' => route('judgements.pdf', $judgement->id)
+        ];
 
         return response()->json($data);
     }

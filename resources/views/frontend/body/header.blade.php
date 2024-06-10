@@ -33,7 +33,7 @@
 </header>
 
     <!-- Start Navbar Area -->
-    <div class="navbar-area">
+    <div class="navbar-area bg-info">
         <!-- Menu For Mobile Device -->
         <div class="mobile-nav">
             <a href="index.html" class="logo">
@@ -45,7 +45,7 @@
         <!-- Menu For Desktop Device -->
         <div class="main-nav">
             <div class="container">
-                <nav class="navbar navbar-expand-md navbar-light ">
+                <nav class="navbar navbar-expand-md navbar-light">
                     <a class="navbar-brand" href="{{ route('home') }}">
                         <img src="" class="logo-one" alt="Logo">
                         <img src="" class="logo-two" alt="Logo">
