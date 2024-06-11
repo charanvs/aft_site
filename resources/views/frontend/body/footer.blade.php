@@ -34,38 +34,38 @@
                     <div class="footer-widget pl-5">
                         <h3>Links</h3>
                         <ul class="footer-list">
-                            <li>
-                                <a href="about.html" target="_blank">
+                            <li class="footer-link" data-text="Home">
+                                <a href="{{ route('home') }}">
                                     <i class='bx bx-caret-right'></i>
                                     About Us
                                 </a>
                             </li>
-                            <li>
-                                <a href="services-1.html" target="_blank">
+                            <li class="footer-link" data-text="Case Management" sub-text="Daily Cause List">
+                                <a href="{{ route('cases.page') }}" >
                                     <i class='bx bx-caret-right'></i>
                                     Case Management
                                 </a>
                             </li>
-                            <li>
-                                <a href="team.html" target="_blank">
+                            <li class="footer-link" data-text="Judgements" sub-text="Judgements in AFT PB">
+                                <a href="{{ route('judgements.page') }}" >
                                     <i class='bx bx-caret-right'></i>
                                     Judgements
                                 </a>
                             </li>
-                            <li>
-                                <a href="gallery.html" target="_blank">
+                            <li class="footer-link" data-text="Members">
+                                <a href="{{ route('members.page') }}" >
                                     <i class='bx bx-caret-right'></i>
-                                    ACT & Rules
+                                    Members
                                 </a>
                             </li>
-                            <li>
-                                <a href="terms-condition.html" target="_blank">
+                            <li class="footer-link" data-text="Vacancies">
+                                <a href="{{ route('vacancies.page') }}" >
                                     <i class='bx bx-caret-right'></i>
                                     Vacancies
                                 </a>
                             </li>
-                            <li>
-                                <a href="privacy-policy.html" target="_blank">
+                            <li class="footer-link" data-text="RTI">
+                                <a href="">
                                     <i class='bx bx-caret-right'></i>
                                     RTI
                                 </a>
@@ -79,37 +79,37 @@
                         <h3>Useful Links</h3>
                         <ul class="footer-list">
                             <li>
-                                <a href="index.html" target="_blank">
+                                <a href="https://www.sci.gov.in/" target="_blank">
                                     <i class='bx bx-caret-right'></i>
                                     Supreme Court Of India
                                 </a>
                             </li>
                             <li>
-                                <a href="blog-1.html" target="_blank">
+                                <a href="https://delhihighcourt.nic.in/" target="_blank">
                                     <i class='bx bx-caret-right'></i>
-                                 High Court Of    Delhi
+                                 High Court Of Delhi
                                 </a>
                             </li>
                             <li>
-                                <a href="faq.html" target="_blank">
+                                <a href="https://delhidistrictcourts.nic.in/" target="_blank">
                                     <i class='bx bx-caret-right'></i>
                                     Delhi District Court
                                 </a>
                             </li>
                             <li>
-                                <a href="testimonials.html" target="_blank">
+                                <a href="https://cgat.gov.in/" target="_blank">
                                     <i class='bx bx-caret-right'></i>
                                     Central Administrative Tribunal
                                 </a>
                             </li>
                             <li>
-                                <a href="gallery.html" target="_blank">
+                                <a href="https://www.india.gov.in/" target="_blank">
                                     <i class='bx bx-caret-right'></i>
                                     National Portal Of India
                                 </a>
                             </li>
                             <li>
-                                <a href="contact.html" target="_blank">
+                                <a href="https://igod.gov.in/" target="_blank">
                                     <i class='bx bx-caret-right'></i>
                                    GOI Directory
                                 </a>
@@ -120,24 +120,22 @@
 
                 <div class="col-lg-3 col-md-6">
                     <div class="footer-widget">
-                        <h3>Newsletter</h3>
+                        <h3>Armed Forces Tribunal - Principal Bench</h3>
                         <p>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                            Nullam tempor eget ante fringilla rutrum aenean sed venenatis .
+                            <br>
+                            <br>
+                            <br>
                         </p>
                         <div class="footer-form">
                             <form class="newsletter-form" data-toggle="validator" method="POST">
                                 <div class="row">
-                                    <div class="col-lg-12">
-                                        <div class="form-group">
-                                            <input type="email" class="form-control" placeholder="Your Email*" name="EMAIL" required autocomplete="off">
-                                        </div>
+
                                     </div>
 
                                     <div class="col-lg-12 col-md-12">
-                                        <button type="submit" class="default-btn btn-bg-one">
-                                            Subscribe Now
-                                        </button>
+                                        <a href="https://www.google.com/maps/place/Advocate+Armed+Forces+Tribunal+Delhi/@28.5669066,77.1744409,17z/data=!3m1!4b1!4m6!3m5!1s0x390d1d9bc8f1456d:0x17cc6f0515abb32c!8m2!3d28.5669019!4d77.1770158!16s%2Fg%2F11bwchhcqw?entry=ttu" class="default-btn btn-bg-one" target="_blank">
+                                           Visit Us
+                                        </a>
                                         <div id="validator-newsletter" class="form-result"></div>
                                     </div>
                                 </div>
@@ -225,6 +223,22 @@
         table.buttons().container()
             .appendTo( '#example2_wrapper .col-md-6:eq(0)' );
     } );
+</script>
+<script>
+    $(document).ready(function() {
+        // Event listener for footer link clicks
+        $(".footer-link").click(function(e) {
+            // Get the text content of the clicked footer link
+            var mainMenuText = $(this).data("text");
+            var subMenuText = $(this).sub("text");
+
+
+            // Save the text content to localStorage
+            localStorage.setItem('selectedMainMenuText', mainMenuText);
+            localStorage.setItem('selectedSubMenuText', subMenuText);
+
+        });
+    });
 </script>
 <!--app JS-->
 <script src="{{ asset('backend/assets/js/app.js') }}"></script>

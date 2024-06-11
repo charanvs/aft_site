@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('iterim_judgements', function (Blueprint $table) {
             $table->id();
-            $table->regid();
+            $table->integer('regid');
             $table->date('dol');
             $table->string('pdfname');
 

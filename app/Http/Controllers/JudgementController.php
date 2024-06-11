@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Facades\Storage;
 
 use Illuminate\Http\Request;
 use App\Models\Judgement;
@@ -10,7 +9,6 @@ use App\Models\Judgement;
 use App\Models\JudgementOne;
 use App\Models\JudgementTwo;
 use App\Models\JudgementThree;
-use App\Models\ReportableJudgement;
 
 class JudgementController extends Controller
 {
@@ -51,11 +49,11 @@ class JudgementController extends Controller
 
         $judgements = $query->paginate(10);
 
-        // return response()->json([
-        //     'data' => $judgements->items(),
-        //     'links' => $judgements->links('pagination::bootstrap-4')->toHtml(),
-        //     'from' => $judgements->firstItem(),
-        // ]);
+        // Include corum descriptions in the response
+        foreach ($judgements as $judgement) {
+            $judgement->corum_descriptions;
+        }
+
         return response()->json($judgements);
     } // end mehtod
 
@@ -99,21 +97,27 @@ class JudgementController extends Controller
 
     public function ShowJudgementsData($id)
     {
+
         $judgement = Judgement::findOrFail($id);
+
 
         // Adjust this part according to your actual database structure
         $data = [
-            'regno' => $judgement->reg_no,
+            'regno' => $judgement->regno,
             'year' => $judgement->year,
-            'deptt' => $judgement->department,
+            'deptt' => $judgement->deptt,
             'associated' => $judgement->associated,
             'dor' => $judgement->dor,
-            'padvocate' => $judgement->petitioner_advocate,
-            'radvocate' => $judgement->respondent_advocate,
+            'padvocate' => $judgement->padvocate,
+            'radvocate' => $judgement->radvocate,
             'subject' => $judgement->subject,
             'petitioner' => $judgement->petitioner,
+            'respondent' => $judgement->respondent,
             'court_no' => $judgement->court_no,
             'remarks' => $judgement->remarks,
+            'corum' => $judgement->corum,
+            'dpdf' => $judgement->dpdf,
+            'corum_descriptions' => $judgement->corum_descriptions,
             'pdfUrl' => route('judgements.pdf', $judgement->id)
         ];
 

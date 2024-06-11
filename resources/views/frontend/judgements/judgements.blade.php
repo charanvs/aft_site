@@ -39,7 +39,7 @@
     <div class="tab reservation-tab ml-5">
       <ul class="tabs">
         @foreach (['File Number', 'Party Name', 'Advocate Name', 'Case Type', 'Date', 'Subject'] as $tab)
-        <li>
+        <li class="bg-secondary  m-1">
           <a href="#" class="default-btn btn-bg-four border-radius-5 btn-spacing">
             <span class="text-white h6">{{ $tab }}</span>
           </a>
@@ -147,10 +147,13 @@
                   <table id="dataTable{{ str_replace(' ', '', $searchBy) }}" class="table bg-secondary text-white">
                     <thead></thead>
                     <tbody></tbody>
+                    <tfoot>
+                        <nav aria-label="Page navigation example">
+                            <ul class="pagination" id="paginationLinks{{ str_replace(' ', '', $searchBy) }}"></ul>
+                          </nav>
+                    </tfoot>
                   </table>
-                  <nav aria-label="Page navigation example">
-                    <ul class="pagination" id="paginationLinks{{ str_replace(' ', '', $searchBy) }}"></ul>
-                  </nav>
+
                 </div>
               </div>
             </div>

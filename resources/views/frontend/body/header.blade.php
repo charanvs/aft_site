@@ -23,7 +23,7 @@
                         </li>
                         <li>
                             <i class='bx bx-envelope mr-1'></i>
-                            <a href="mailto:hello@atoli.com" class="text-decoration-none">pbnewdelhi@mail.com</a>
+                            <a href="mailto:pbnewdelhi@mail.com" class="text-decoration-none">pbnewdelhi@mail.com</a>
                         </li>
                     </ul>
                 </div>
@@ -32,237 +32,232 @@
     </div>
 </header>
 
-    <!-- Start Navbar Area -->
-    <div class="navbar-area bg-info">
-        <!-- Menu For Mobile Device -->
-        <div class="mobile-nav">
-            <a href="index.html" class="logo">
-                <img src="" class="logo-one" alt="Logo">
-                <img src="" class="logo-two" alt="Logo">
-            </a>
-        </div>
+<!-- Start Navbar Area -->
+<div class="navbar-area">
+    <!-- Menu For Mobile Device -->
+    <div class="mobile-nav">
+        <a href="{{ route('home') }}" class="logo">
+            <img src="" class="logo-one" alt="Logo">
+            <img src="" class="logo-two" alt="Logo">
+        </a>
+    </div>
 
-        <!-- Menu For Desktop Device -->
-        <div class="main-nav">
-            <div class="container">
-                <nav class="navbar navbar-expand-md navbar-light">
-                    <a class="navbar-brand" href="{{ route('home') }}">
-                        <img src="" class="logo-one" alt="Logo">
-                        <img src="" class="logo-two" alt="Logo">
-                    </a>
+    <!-- Menu For Desktop Device -->
+    <div class="main-nav nav-three">
+        <div class="container">
+            <nav class="navbar navbar-expand-md nav-danger">
+                <a class="navbar-brand" href="{{ route('home') }}">
+                    <img src="{{ asset('frontend/assets/img/inner-banner/logo.png') }}" class="logo-two" alt="Logo">
+                </a>
 
-                    <div class="collapse navbar-collapse mean-menu" id="navbarSupportedContent">
-                        <ul class="navbar-nav m-auto">
-                            <li class="nav-item">
-                               <a href="{{ route('home') }}" class="nav-link {{ isActiveRoute('home') }}">
+                <div class="collapse navbar-collapse mean-menu" id="navbarSupportedContent">
+                    <ul class="navbar-nav m-auto custom-nav">
+                        <li class="nav-item">
+                            <a href="{{ route('home') }}" class="nav-link {{ isActiveRoute('home') }}" data-text="Home">
                                 Home
                             </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="{{ route('members.page') }}" class="nav-link {{ isActiveRoute('members.page') }}">
-                                    Members
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('members.page') }}" class="nav-link {{ isActiveRoute('members.page') }}" data-text="Members">
+                                Members
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link {{ areActiveRoutes(['daily_cause_list.page', 'cases.page']) }}" data-text="Case Management">
+                                Case Management
 
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="#" class="nav-link {{ areActiveRoutes(['services', 'daily_cause_list.page']) }}">
-                                 Case Management
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li class="nav-item">
+                                    <a href="{{ route('daily_cause_list.page') }}" class="nav-link" data-text="Daily Cause List">
+                                        Daily Cause List
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{ route('cases.page') }}" class="nav-link" data-text="Search Orders">
+                                        Search Orders
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link {{ areActiveRoutes(['judgements', 'judgements.page', 'judgements.reportable', 'judgements.largebench']) }}" data-text="Judgements">
+                                Judgements
 
-                                    <i class='bx bx-chevron-down'></i>
-                                </a>
-                                <ul class="dropdown-menu">
-                                    <li class="nav-item">
-                                        <a href="{{ route('daily_cause_list.page') }}" class="nav-link">
-                                            Daily Cause List
-                                        </a>
-                                    </li>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li class="nav-item">
+                                    <a href="{{ route('judgements.page') }}" class="nav-link" data-text="Judgements in AFT PB">
+                                        Judgements in AFT PB
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{ route('judgements.reportable') }}" class="nav-link" data-text="Reportable Judgements">
+                                        Reportable Judgements
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{ route('judgements.largebench') }}" class="nav-link" data-text="Large Bench Orders">
+                                        Large Bench Orders
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="restaurant.html" class="nav-link" data-text="Review Cases Of Regional Branches">
+                                        Review Cases Of Regional Branches
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="reservation.html" class="nav-link" data-text="Large Bench Circulars">
+                                        Large Bench Circulars
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-text="Regional Benches">
+                                Regional Benches
 
-                                    <li class="nav-item">
-                                        <a href="team.html" class="nav-link">
-                                            Search Orders
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="faq.html" class="nav-link">
-                                            Daily Orders
-                                        </a>
-                                    </li>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li class="nav-item">
+                                    <a href="book.html" class="nav-link" data-text="Chandigarh">
+                                        Chandigarh
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="team.html" class="nav-link" data-text="Chennai">
+                                        Chennai
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="faq.html" class="nav-link" data-text="Guwhati">
+                                        Guwhati
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="faq.html" class="nav-link" data-text="Jabalpur">
+                                        Jabalpur
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="faq.html" class="nav-link" data-text="Jaipur">
+                                        Jaipur
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="faq.html" class="nav-link" data-text="Kochi">
+                                        Kochi
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="faq.html" class="nav-link" data-text="Kolkata">
+                                        Kolkata
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="faq.html" class="nav-link" data-text="Lucknow">
+                                        Lucknow
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="faq.html" class="nav-link" data-text="Mumbai">
+                                        Mumbai
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="faq.html" class="nav-link" data-text="Srinagar">
+                                        Srinagar
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-text="Act & Rules">
+                                Act & Rules
 
-
-                                </ul>
-                            </li>
-                            <li class="nav-item">
-                                <a href="#" class="nav-link {{ areActiveRoutes(['judgements', 'judgements.page', 'judgements.reportable', 'judgements.largebench']) }}">
-                                    Judgements
-                                        <i class='bx bx-chevron-down'></i>
-
-                                </a>
-                                <ul class="dropdown-menu">
-                                    <li class="nav-item">
-                                        <a href="{{ route('judgements.page') }}" class="nav-link">
-                                            Judgements in AFT PB
-                                        </a>
-                                    </li>
-
-                                    <li class="nav-item">
-                                        <a href="{{ route('judgements.reportable') }}" class="nav-link">
-                                            Reportable Judgements
-
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="{{ route('judgements.largebench') }}" class="nav-link">
-                                            Large Bench Orders
-                                        </a>
-                                    </li>
-
-                                    <li class="nav-item">
-                                        <a href="restaurant.html" class="nav-link">
-                                            Review Cases Of Regional Branches
-
-                                        </a>
-                                    </li>
-
-                                    <li class="nav-item">
-                                        <a href="reservation.html" class="nav-link">
-                                            Large Bench Circulars
-                                        </a>
-                                    </li>
-                                </ul>
-                            </li>
-
-                            <li class="nav-item">
-                                <a href="#" class="nav-link">
-                                    Regional Benches
-                                        <i class='bx bx-chevron-down'></i>
-
-                                </a>
-                                <ul class="dropdown-menu">
-                                    <li class="nav-item">
-                                        <a href="book.html" class="nav-link">
-                                            Chandigarh
-                                        </a>
-
-                                    </li>
-
-                                    <li class="nav-item">
-                                        <a href="team.html" class="nav-link">
-                                            Chennai
-                                        </a>
-
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="faq.html" class="nav-link">
-                                            Guwhati
-                                        </a>
-
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="faq.html" class="nav-link">
-                                            Jabalpur
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="faq.html" class="nav-link">
-                                            Jaipur
-                                        </a>
-
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="faq.html" class="nav-link">
-                                            Kochi
-                                        </a>
-                                    </li>
-
-                                    <li class="nav-item">
-                                        <a href="faq.html" class="nav-link">
-                                            Kolkata
-                                        </a>
-
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="faq.html" class="nav-link">
-                                            Lucknow
-                                        </a>
-
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="faq.html" class="nav-link">
-                                            Mumbai
-                                        </a>
-
-                                    </li>
-
-                                    <li class="nav-item">
-                                        <a href="faq.html" class="nav-link">
-                                            Srinagar
-                                        </a>
-                                    </li>
-                                </ul>
-                            </li>
-
-                            <li class="nav-item">
-                                <a href="#" class="nav-link">
-
-                                        Act & Rules
-                                    <i class='bx bx-chevron-down'></i>
-
-                                </a>
-                                <ul class="dropdown-menu">
-                                    <li class="nav-item">
-                                        <a href="book.html" class="nav-link">
-                                            AFT Act & Rules
-                                        </a>
-                                    </li>
-
-                                    <li class="nav-item">
-                                        <a href="team.html" class="nav-link">
-                                            Army Act & Rules
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="faq.html" class="nav-link">
-                                            Air Force Act & Rules
-
-                                        </a>
-                                    </li>
-
-                                    <li class="nav-item">
-                                        <a href="restaurant.html" class="nav-link">
-                                            Navy Act & Rules
-                                        </a>
-                                    </li>
-                                </ul>
-                            </li>
-
-
-
-                            <li class="nav-item">
-                                <a href="{{ route('vacancies.page') }}" class="nav-link {{ isActiveRoute('vacancies.page') }}">
-                                    Vacancies
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="contact.html" class="nav-link">
-                                    RTI
-                                </a>
-                            </li>
-
-                        </ul>
-
-                    </div>
-                </nav>
-            </div>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li class="nav-item">
+                                    <a href="book.html" class="nav-link" data-text="AFT Act & Rules">
+                                        AFT Act & Rules
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="team.html" class="nav-link" data-text="Army Act & Rules">
+                                        Army Act & Rules
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="faq.html" class="nav-link" data-text="Air Force Act & Rules">
+                                        Air Force Act & Rules
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="restaurant.html" class="nav-link" data-text="Navy Act & Rules">
+                                        Navy Act & Rules
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('vacancies.page') }}" class="nav-link {{ isActiveRoute('vacancies.page') }}" data-text="Vacancies">
+                                Vacancies
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="contact.html" class="nav-link" data-text="RTI">
+                                RTI
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
         </div>
     </div>
-    <!-- End Navbar Area -->
+</div>
+<!-- End Navbar Area -->
 
-    <!-- Banner Area -->
-    <div class="banner-area" style="height: 400px;">
-        <div class="container">
-            <div class="banner-content">
-                <h1>AFT-PB</h1>
-            </div>
+<!-- Inner Banner -->
+<div class="inner-banner inner-bg5">
+    <div class="container">
+        <div class="inner-title">
+            <ul>
+                <li id="main-menu-value">Home</li>
+                <li><i class='bx bx-chevron-right'></i></li>
+                <li id="selected-menu-value"></li>
+            </ul>
+            <h3>AFT PB</h3>
         </div>
     </div>
-    <!-- Banner Area End -->
+</div>
+<!-- Inner Banner End -->
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function() {
+        // Retrieve and display the saved menu item text from localStorage on page load
+        var savedMainMenuText = localStorage.getItem('selectedMainMenuText');
+        var savedSubMenuText = localStorage.getItem('selectedSubMenuText');
+        if (savedMainMenuText) {
+            $("#main-menu-value").text(savedMainMenuText);
+        }
+        if (savedSubMenuText) {
+            $("#selected-menu-value").text(savedSubMenuText);
+        }
+
+        // Event listener for menu item clicks
+        $(".nav-link").click(function() {
+            // Check if the clicked element is a sub-menu item or main menu item
+            var subMenuText = $(this).data("text");
+            var mainMenuText = $(this).closest('.dropdown-menu').siblings('.nav-link').data("text") || subMenuText;
+
+            // Save the text content to localStorage
+            localStorage.setItem('selectedMainMenuText', mainMenuText);
+            localStorage.setItem('selectedSubMenuText', subMenuText);
+
+            // Display the text content in the desired elements
+            $("#main-menu-value").text(mainMenuText);
+            $("#selected-menu-value").text(subMenuText);
+        });
+    });
+</script>

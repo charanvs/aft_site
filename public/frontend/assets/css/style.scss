@@ -400,7 +400,7 @@ Navbar Area
 }
 .main-nav {
     position: inherit;
-    background-color: $color-white;
+    background-color: #212529;
     top: 0;
     left: 0;
     z-index: inherit;
@@ -753,14 +753,14 @@ Navbar Area
     z-index: 999;
     .main-nav {
         top: 0;
-        background-color: $color-white;
+        background-color: #343a40;
         position: fixed;
         z-index: 9999;
         box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
     }
     .nav-two {
         top: 0;
-        background-color: $color-white;
+        background-color: #343a40;
         position: fixed;
         z-index: 9999;
         box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);

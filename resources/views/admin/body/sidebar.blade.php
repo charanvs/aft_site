@@ -4,7 +4,7 @@
         <img src="{{ asset('backend/assets/images/logo-icon.png') }}" class="logo-icon" alt="logo icon">
       </div>
       <div>
-        <h4 class="logo-text">Rocker</h4>
+        <h4 class="logo-text">AFT PB</h4>
       </div>
       <div class="toggle-icon ms-auto"><i class='bx bx-arrow-back'></i>
       </div>
@@ -36,6 +36,20 @@
           <li> <a href="{{ route('all.team') }}"><i class='bx bx-radio-circle'></i>All Team</a>
           </li>
           <li> <a href="{{ route('add.team') }}"><i class='bx bx-radio-circle'></i>Add Team</a>
+          </li>
+
+        </ul>
+      </li>
+      <li>
+        <a href="javascript:;" class="has-arrow">
+          <div class="parent-icon"><i class="bx bx-category"></i>
+          </div>
+          <div class="menu-title">Manage Banner</div>
+        </a>
+        <ul>
+          <li> <a href="{{ route('all.banner') }}"><i class='bx bx-radio-circle'></i>All Banner</a>
+          </li>
+          <li> <a href="{{ route('add.banner') }}"><i class='bx bx-radio-circle'></i>Add Banner</a>
           </li>
 
         </ul>

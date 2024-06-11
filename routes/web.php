@@ -5,6 +5,7 @@ use App\Http\Controllers\FrontendController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\Backend\BannerController;
 use App\Http\Controllers\Home\HomeSliderController;
 use App\Http\Controllers\JudgementController;
 use App\Http\Controllers\File\FileController;
@@ -77,7 +78,14 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/edit/team/{id}', 'EditTeam')->name('edit.team');
         Route::post('/team/update', 'UpdateTeam')->name('team.update');
     });
+    Route::controller(BannerController::class)->group(function () {
+        Route::get('/all/banner', 'AllBanner')->name('all.banner');
+        Route::get('/add/banner', 'AddBanner')->name('add.banner');
+        Route::post('/banner/store', 'StoreBanner')->name('banner.store');
+    });
 });
+
+
 
 require __DIR__ . '/auth.php';
 

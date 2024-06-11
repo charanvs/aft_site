@@ -7,8 +7,24 @@ var truncateText = function (text, maxLength) {
 };
 
 $(document).ready(function () {
+    function clearTableContents() {
+        $(".table tbody").empty();
+        $(".table thead").empty();
+        $(".table tfoot nav").empty();
+        $(".record-count").remove();
+    }
+
+    // Add event listeners to tab buttons
+    $(".tab ul.tabs li a").click(function (event) {
+        clearTableContents();
+    });
+
+    // Event listener for search buttons
+    $(".default-btn.btn-bg-three.border-radius-5").click(function (event) {
+        clearTableContents();
+    });
     function fetchJudgements(
-        url,
+        baseUrl,
         tableId,
         noDataMessage,
         paginationId,
@@ -16,13 +32,21 @@ $(document).ready(function () {
         headers,
         rowBuilder
     ) {
+        var url = new URL(baseUrl, window.location.origin);
+        Object.keys(filters).forEach((key) => {
+            if (filters[key]) {
+                url.searchParams.set(key, filters[key]);
+            }
+        });
+
         $.ajax({
-            url: url,
+            url: url.href,
             type: "GET",
             dataType: "json",
             success: function (response) {
                 $(`#${tableId} tbody`).empty();
                 $(`#${tableId} thead`).empty();
+                $(`#${tableId} tfoot`).empty();
 
                 // Remove any existing record count display
                 $(".record-count").remove();
@@ -120,6 +144,7 @@ $(document).ready(function () {
             type: "GET",
             dataType: "json",
             success: function (detailData) {
+                console.log(detailData);
                 var modalTitle = "Case Details"; // Set modal title
                 var modalFooter = "Click away to close this.";
                 var modalBody = '<div class="container">';
@@ -180,6 +205,10 @@ $(document).ready(function () {
                     detailData.court_no +
                     "</p>";
                 modalBody +=
+                    "<p><strong>Corum:</strong> " +
+                    detailData.corum_descriptions.join(", ") +
+                    "</p>";
+                modalBody +=
                     "<p><strong>Remarks:</strong> " +
                     detailData.remarks +
                     "</p>";
@@ -225,32 +254,68 @@ $(document).ready(function () {
             success: function (detailData) {
                 var modalTitle = "Case PDF"; // Set modal title
                 var modalFooter = "Click away to close this.";
-                var pdfUrl = "{{ url('pdfs') }}/" + detailData.pdfFilename; // Adjust according to your data structure
-                var modalBody = '<div class="container">';
-                modalBody += '<div class="row">';
-                modalBody +=
-                    '<a href="' + pdfUrl + '" target="_blank">View PDF</a>';
-                modalBody += "</div>";
-                modalBody += "</div>";
+                var baseUrl =
+                    "https://aftdelhi.nic.in/assets/judgement/" +
+                    detailData.year +
+                    "/OA/";
+                var pdfUrl =
+                    baseUrl + encodeURIComponent(detailData.dpdf.trim());
 
-                // Populate modal with data
-                $("#myModalLabel").text(modalTitle);
-                $("#modal_footer").text(modalFooter);
-                $(".modal-body").html(modalBody);
+                // Open PDF in a new tab
+                //----------- comment if folder pdf is on your site ------**
 
-                // Open modal
-                $("#myModalPDF").modal("show");
-
-                // Close Modal
-                $("#closeModalButton").click(function () {
-                    $("#myModalPDF").modal("hide");
-                });
+                // Try to open PDF in a new tab
+                var newWindow = window.open(pdfUrl, "_blank");
+                if (
+                    !newWindow ||
+                    newWindow.closed ||
+                    typeof newWindow.closed == "undefined"
+                ) {
+                    alert(
+                        "The PDF could not be opened. Please check your browser settings."
+                    );
+                }
             },
             error: function (xhr, status, error) {
                 console.error(xhr.responseText);
+                alert(
+                    "An error occurred while trying to open the PDF. Please try again later."
+                );
             },
+
+            //----------- Uncomment if folder pdf is on your site ------**
+            // var pdfUrl = "/pdf/" + detailData.dpdf; // Adjust according to your data structure
+            // alert(pdfUrl);
+            // var modalBody = '<div class="container">';
+            // modalBody += '<div class="row">';
+            // modalBody +=
+            //     '<iframe src="' +
+            //     pdfUrl +
+            //     '" width="100%" height="600px"></iframe>';
+            // modalBody += "</div>";
+            // modalBody += "</div>";
+
+            // // Populate modal with data
+            // $("#myModalLabel").text(modalTitle);
+            // $("#modal_footer").text(modalFooter);
+            // $(".modal-body").html(modalBody);
+
+            // // Open modal
+            // $("#myModalPDF").modal("show");
+
+            // // Close Modal
+            // $("#closeModalButton").click(function () {
+            //     $("#myModalPDF").modal("hide");
+            // });
+            // },
+            // error: function (xhr, status, error) {
+            //     console.error(xhr.responseText);
+            // },
         });
     }
+
+    // Make sure to attach the event handler to the PDF buttons
+    $(document).on("click", ".modalDataPDF", handleModalDataPDFClick);
 
     function getFilters() {
         return {
@@ -265,7 +330,9 @@ $(document).ready(function () {
     }
 
     $("#filterButtonFileNumber").click(function () {
-        var filters = getFilters();
+        var filters = {};
+        filters.fileno = $("#fileno").val();
+        filters.year = $("#year").val();
         var url = `/judgements/search/all?fileno=${filters.fileno}&year=${filters.year}`;
         var headers = ["S No", "Reg No", "Year", "Petitioner", "Action"];
         var rowBuilder = function (item) {
@@ -296,7 +363,8 @@ $(document).ready(function () {
     });
 
     $("#filterButtonPartyName").click(function () {
-        var filters = getFilters();
+        var filters = {};
+        filters.partyname = $("#partyname").val();
         var url = `/judgements/search/all?partyname=${filters.partyname}`;
         var headers = ["S No", "Reg No", "Applicant", "Action"];
         var rowBuilder = function (item) {
@@ -326,7 +394,8 @@ $(document).ready(function () {
     });
 
     $("#filterButtonAdvocate").click(function () {
-        var filters = getFilters();
+        var filters = {};
+        filters.advocate = $("#advocate").val();
         var url = `/judgements/search/all?advocate=${filters.advocate}`;
         var headers = [
             "S No",
@@ -366,7 +435,8 @@ $(document).ready(function () {
     });
 
     $("#filterButtonCaseType").click(function () {
-        var filters = getFilters();
+        var filters = {};
+        filters.casetype = $("#casetype").val();
         var url = `/judgements/search/all?casetype=${filters.casetype}`;
         var headers = ["S No", "Reg No", "Case Type", "Petitioner", "Action"];
         var rowBuilder = function (item) {
@@ -397,7 +467,8 @@ $(document).ready(function () {
     });
 
     $("#filterButtonDate").click(function () {
-        var filters = getFilters();
+        var filters = {};
+        filters.casedate = $("#casedate").val();
 
         function formatInputDate(dateString) {
             if (typeof dateString !== "string") {
@@ -444,7 +515,8 @@ $(document).ready(function () {
     });
 
     $("#filterButtonSubject").click(function () {
-        var filters = getFilters();
+        var filters = {};
+        filters.subject = $("#subject").val();
         var url = `/judgements/search/all?subject=${filters.subject}`;
         var headers = ["S No", "Reg No", "Subject", "Petitioner", "Action"];
         var rowBuilder = function (item) {
