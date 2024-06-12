@@ -56,10 +56,10 @@ Route::controller(JudgementController::class)->group(function () {
 // Case Management Routes
 Route::controller(CaseManagementController::class)->group(function () {
     Route::get('/show/cases', 'ShowCases')->name('cases.page');
-    Route::get('/search/case', 'CaseSearch')->name('cases.search');
+    Route::get('/cases/search/all', 'CaseSearch')->name('cases.search');
     Route::get('/cases/search/show/{id}', 'ShowCasesData')->name('case.fileno.search');
-    Route::get('/cases/search/advocate/{advocate}', 'ShowCasesAdvocate')->name('case.advocate.search');
-    Route::get('/cases/search/casetype/{casetype}', 'ShowCasesType')->name('case.type.search');
+    // Route::get('/cases/search/advocate/{advocate}', 'ShowCasesAdvocate')->name('case.advocate.search');
+    // Route::get('/cases/search/casetype/{casetype}', 'ShowCasesType')->name('case.type.search');
 });
 
 // Frontend Routes

@@ -4,8 +4,8 @@
   AFT-PB | Case Management
 @endsection
 @include('frontend.body.header')
+
 <style>
-  /* Custom CSS for spacing between buttons */
   .btn-spacing {
     margin-right: 10px;
   }
@@ -37,24 +37,25 @@
 <div class="reservation-widget-area pt-60 pb-70">
   <div class="container ml-5">
     <div class="tab reservation-tab ml-5">
-      <ul class="tabs d-flex flex-wrap">
+      <ul class="tabs">
         @foreach (['File Number', 'Party Name', 'Advocate Name', 'Case Type', 'Date', 'Subject'] as $tab)
-          <li class="bg-secondary m-1">
-            <a href="#" class="default-btn btn-bg-four border-radius-5 btn-spacing">
-              <span class="text-white h6">{{ $tab }}</span>
-            </a>
-          </li>
+        <li class="bg-secondary  m-1">
+          <a href="#" class="default-btn btn-bg-four border-radius-5 btn-spacing">
+            <span class="text-white h6">{{ $tab }}</span>
+          </a>
+        </li>
         @endforeach
       </ul>
 
       <div class="tab_content current active pt-45">
-        <div class="tabs_item current">
+        @foreach (['File Number', 'Party Name', 'Advocate', 'Case Type', 'Date', 'Subject'] as $key => $searchBy)
+        <div class="tabs_item {{ $key === 0 ? 'current' : '' }}">
           <div class="reservation-tab-item">
             <div class="row">
-              <div class="col-lg-4">
+              <div class="col-lg-{{ $searchBy === 'Advocate' ? '3' : '4' }}">
                 <div class="side-bar-form">
-                  <h3>Search By - File Number</h3>
-                  <form method="get" action="{{ route('judgements.page') }}">
+                  <h3>Search By - {{ $searchBy }}</h3>
+                  <form method="get" action="{{ in_array($searchBy, ['File Number', 'Date', 'Subject']) ? route('judgements.page') : '#' }}">
                     <div class="row align-items-center">
                       <div class="col-lg-12">
                         <div class="form-group">
@@ -70,6 +71,7 @@
                           </select>
                         </div>
                       </div>
+                      @if ($searchBy === 'File Number')
                       <div class="col-lg-12">
                         <div class="form-group">
                           <label class="h5">File No</label>
@@ -90,86 +92,32 @@
                           <i class='bx bx-calendar-check'></i>
                         </div>
                       </div>
-
-                      <div class="col-lg-12 col-md-12">
-                        <button id="filterButtonFile" type="button" class="default-btn btn-bg-three border-radius-5">
-                          Search FileNo
-                        </button>
-                      </div>
-                    </div>
-                  </form>
-                </div>
-              </div>
-
-              <div class="col-lg-8">
-                <div class="reservation-widget-content">
-                  <h2>Details of Cases - File No</h2>
-                  <hr>
-                  <table id="dataTableFile" class="table table-striped">
-                    <thead>
-                      <!-- Table Head where data will be displayed -->
-                    </thead>
-                    <tbody>
-                      <!-- Table rows will be populated dynamically -->
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Other tabs content with similar structure -->
-
-        @foreach (['Party Name', 'Advocate', 'Case Type', 'Case Date', 'Subject'] as $searchBy)
-        <div class="tabs_item">
-          <div class="reservation-tab-item">
-            <div class="row">
-              <div class="col-lg-4">
-                <div class="side-bar-form">
-                  <h3>Search By - {{ $searchBy }}</h3>
-                  <form method="get" action="#">
-                    <div class="row align-items-center">
+                      @elseif ($searchBy === 'Date')
                       <div class="col-lg-12">
                         <div class="form-group">
-                          <label>
-                            <h5>Select Bench</h5>
-                          </label>
-                          <select class="form-control">
-                            <option>Principal Bench</option>
-                            <option>Chandigarh</option>
-                            <option>Chennai</option>
-                            <option>Guwhati</option>
-                            <option>Kolkata</option>
-                          </select>
-                        </div>
-                      </div>
-                      @if ($searchBy == 'Party Name')
-                      <div class="col-lg-12">
-                        <div class="form-group">
-                          <label>{{ $searchBy }}</label>
+                          <label class="h5">Date</label>
                           <div class="input-group">
-                            <input type="text" class="form-control" placeholder="{{ $searchBy }}" id="partyname">
+                            <input type="date" class="form-control" placeholder="Date" id="casedate">
                             <span class="input-group-addon"></span>
                           </div>
-                          <i class='bx bx-rename'></i>
+                          <i class='bx bx-calendar'></i>
                         </div>
                       </div>
-                      @elseif ($searchBy == 'Advocate')
+                      @elseif ($searchBy !== 'Case Type')
                       <div class="col-lg-12">
                         <div class="form-group">
-                          <label>{{ $searchBy }} Name</label>
+                          <label class="h5">{{ $searchBy }}</label>
                           <div class="input-group">
-                            <input type="text" class="form-control" placeholder="Enter {{ $searchBy }} Name" id="advocate">
+                            <input type="text" class="form-control" placeholder="{{ $searchBy }}" id="{{ strtolower(str_replace(' ', '', $searchBy)) }}">
                             <span class="input-group-addon"></span>
                           </div>
-                          <i class='bx bx-user-pin'></i>
+                          <i class='bx {{ $searchBy === 'File Number' ? 'bx-file-blank' : ($searchBy === 'Party Name' ? 'bx-rename' : ($searchBy === 'Advocate' ? 'bx-user-pin' : 'bx-calendar-check')) }}'></i>
                         </div>
                       </div>
-                      @elseif ($searchBy == 'Case Type')
+                      @else
                       <div class="col-lg-12">
                         <div class="form-group">
-                          <label>Select {{ $searchBy }}</label>
+                          <label>Select Case Type</label>
                           <select class="form-control" id="casetype">
                             <option value="1">OA</option>
                             <option value="2">TA</option>
@@ -181,33 +129,10 @@
                           <i class='bx bx-search-alt'></i>
                         </div>
                       </div>
-                      @elseif ($searchBy == 'Case Date')
-                      <div class="col-lg-12">
-                        <div class="form-group">
-                          <label>{{ $searchBy }}</label>
-                          <div class="input-group">
-                            <input type="date" class="form-control" placeholder="{{ $searchBy }}" id="casedate">
-                            <span class="input-group-addon"></span>
-                          </div>
-                          <i class='bx bx-calendar'></i>
-                        </div>
-                      </div>
-                      @elseif ($searchBy == 'Subject')
-                      <div class="col-lg-12">
-                        <div class="form-group">
-                          <label>{{ $searchBy }}</label>
-                          <div class="input-group">
-                            <input type="text" class="form-control" placeholder="Enter {{ $searchBy }}" id="subject">
-                            <span class="input-group-addon"></span>
-                          </div>
-                          <i class='bx bx-book-content'></i>
-                        </div>
-                      </div>
                       @endif
-
                       <div class="col-lg-12 col-md-12">
                         <button id="filterButton{{ str_replace(' ', '', $searchBy) }}" type="button" class="default-btn btn-bg-three border-radius-5">
-                          Search {{ $searchBy }}
+                          Search {{ str_replace(' ', '', $searchBy) }}
                         </button>
                       </div>
                     </div>
@@ -215,45 +140,42 @@
                 </div>
               </div>
 
-              <div class="col-lg-8">
+              <div class="col-lg-{{ $searchBy === 'Advocate' ? '9' : '8' }}">
                 <div class="reservation-widget-content">
-                  <h2>Cases - {{ $searchBy }}</h2>
-                  <table id="dataTable{{ str_replace(' ', '', $searchBy) }}" class="table table-striped">
-                    <thead>
-                      <!-- Table Header from script will be displayed -->
-                    </thead>
-                    <tbody>
-                      <!-- Table rows will be populated dynamically -->
-                    </tbody>
+                  <h2>Details of Cases - {{ $searchBy }}</h2>
+                  <hr>
+                  <table id="dataTable{{ str_replace(' ', '', $searchBy) }}" class="table bg-secondary text-white">
+                    <thead></thead>
+                    <tbody></tbody>
+                    <tfoot>
+                        <nav aria-label="Page navigation example">
+                            <ul class="pagination" id="paginationLinks{{ str_replace(' ', '', $searchBy) }}"></ul>
+                          </nav>
+                    </tfoot>
                   </table>
-                  <nav aria-label="Page navigation example">
-                    <ul class="pagination" id="paginationLinks{{ str_replace(' ', '', $searchBy) }}"></ul>
-                  </nav>
+
                 </div>
               </div>
             </div>
           </div>
         </div>
         @endforeach
-
       </div>
     </div>
   </div>
 </div>
 
-<!-- Modal HTML -->
+<!-- Modals -->
 <div class="modal fade" id="myModal" tabindex="-1" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title">Case Details</h5>
+        <h5 class="modal-title">Modal title</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <!-- Modal Body Content -->
         <p>Modal body content goes here.</p>
       </div>
-
       <div class="modal-footer">
         <button id="printButton" class="btn btn-primary">Print</button>
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -262,7 +184,6 @@
   </div>
 </div>
 
-<!-- Modal HTML for PDF display -->
 <div class="modal fade" id="myModalPDF" tabindex="-1" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
@@ -271,7 +192,6 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <!-- Modal Body Content -->
         <p>Modal body content goes here.</p>
       </div>
       <div class="modal-footer" id="modal_footer">
@@ -282,9 +202,6 @@
 </div>
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script>
-    var casesSearchUrl = "{{ route('cases.search') }}";
-</script>
 <script src="{{ asset('frontend/assets/js/search_cases.js') }}"></script>
 
 @endsection

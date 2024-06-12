@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\CaseRegistration;
 
-
 class CaseManagementController extends Controller
 {
     public function ShowCases()
@@ -18,47 +17,37 @@ class CaseManagementController extends Controller
         $query = CaseRegistration::query();
 
         if ($request->has('fileno') && $request->has('year')) {
-            $query->where('file_no', $request->input('fileno'))
-                ->where('year', $request->input('year'));
+            $query->where('file_no', $request->fileno)->where('year', $request->year);
         }
 
         if ($request->has('partyname')) {
-            $query->where('applicant', 'like', '%' . $request->input('partyname') . '%');
+            $query->where('applicant', 'LIKE', '%' . $request->partyname . '%');
         }
 
         if ($request->has('advocate')) {
-            $query->where(function ($q) use ($request) {
-                $q->where('padvocate', 'like', '%' . $request->input('advocate') . '%')
-                    ->orWhere('radvocate', 'like', '%' . $request->input('advocate') . '%');
-            });
+            $query->where('padvocate', 'LIKE', '%' . $request->advocate . '%')->orWhere('radvocate', 'LIKE', '%' . $request->advocate . '%');
         }
 
         if ($request->has('casetype')) {
-            $query->where('case_type', $request->input('casetype'));
+            $query->where('case_type', $request->casetype);
         }
 
         if ($request->has('casedate')) {
-            $query->where('dol', '=', $request->input('casedate'));
+            $query->where('dol', $request->casedate);
         }
 
         if ($request->has('subject')) {
-            $query->where('subject', 'like', '%' . $request->input('subject') . '%');
+            $query->where('subject', 'LIKE', '%' . $request->subject . '%');
         }
 
-        // Log the query
-        \Log::info('SQL Query: ' . $query->toSql());
-        \Log::info('Query Bindings: ' . json_encode($query->getBindings()));
-
-        // Paginate the results
         $cases = $query->paginate(10);
 
-        // Return response as JSON with pagination links
-        return response()->json([
-            'data' => $cases->items(),
-            'links' => $cases->withQueryString()->links('pagination::bootstrap-4')->toHtml(),
-            'from' => $cases->firstItem(),
-        ]);
+        // dd($cases);
+
+        return response()->json($cases);
     }
+
+
 
 
     public function ShowCasesData($id)
