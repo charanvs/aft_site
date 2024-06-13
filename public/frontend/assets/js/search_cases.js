@@ -144,7 +144,6 @@ $(document).ready(function () {
 
                     // Attach click event handler for modalData buttons
                     $(".modalData").click(handleModalDataClick);
-                    $(".modalDataPDF").click(handleModalDataPDFClick);
                 }
             },
             error: function (xhr, status, error) {
@@ -218,34 +217,28 @@ $(document).ready(function () {
                     </div>
                 </div>
             </div>`;
+        const pdfUrl = generatePdfRoute.replace(":id", detailData.id);
+        const modalFooter = `
+            <button id="printButton" class="btn btn-primary">Print</button>
+            <a href="${pdfUrl}" id="pdfButton" class="btn btn-secondary">Download PDF</a>
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        `;
 
-        const modalFooter =
-            '<button id="printButton" class="btn btn-primary">Print</button> Click away to close this.';
         $(".modal-body").html(modalBody);
-        $("#modal_footer").html(modalFooter);
+        $(".modal-footer").html(modalFooter);
         $("#myModalLabel").text(modalTitle);
         $("#myModal").modal("show");
 
         $("#printButton").click(printModalContent);
-        $("#closeModalButton").click(closeModal);
     }
 
-    function handleModalDataClick() {
-        var id = $(this).data("id");
-
-        // Perform AJAX request to fetch data for the specific ID
-        $.ajax({
-            url: "/cases/search/show/" + id, // Adjust this URL according to your route
-            type: "GET",
-            dataType: "json",
-            success: function (detailData) {
-                displayModal(detailData);
-            },
-            error: function (xhr, status, error) {
-                console.error(xhr.responseText);
-            },
-        });
+    function handlePdfButtonClick() {
+        const id = $(this).data("id");
+        var url = `/pdf/?id=${filters.casedate}`;
     }
+
+    // Bind the PDF button click event handler
+    $(document).on("click", "#pdfButton", handlePdfButtonClick);
 
     function printModalContent() {
         const printWindow = window.open("", "_blank");
@@ -265,7 +258,7 @@ $(document).ready(function () {
         printWindow.print();
     }
 
-    function handleModalDataPDFClick() {
+    function handleModalDataClick() {
         var id = $(this).data("id");
 
         // Perform AJAX request to fetch data for the specific ID
@@ -274,70 +267,13 @@ $(document).ready(function () {
             type: "GET",
             dataType: "json",
             success: function (detailData) {
-                var modalTitle = "Case PDF"; // Set modal title
-                var modalFooter = "Click away to close this.";
-                var baseUrl =
-                    "https://aftdelhi.nic.in/assets/judgement/" +
-                    detailData.year +
-                    "/OA/";
-                var pdfUrl =
-                    baseUrl + encodeURIComponent(detailData.dpdf.trim());
-
-                // Open PDF in a new tab
-                //----------- comment if folder pdf is on your site ------**
-
-                // Try to open PDF in a new tab
-                var newWindow = window.open(pdfUrl, "_blank");
-                if (
-                    !newWindow ||
-                    newWindow.closed ||
-                    typeof newWindow.closed == "undefined"
-                ) {
-                    alert(
-                        "The PDF could not be opened. Please check your browser settings."
-                    );
-                }
+                displayModal(detailData);
             },
             error: function (xhr, status, error) {
                 console.error(xhr.responseText);
-                alert(
-                    "An error occurred while trying to open the PDF. Please try again later."
-                );
             },
-
-            //----------- Uncomment if folder pdf is on your site ------**
-            // var pdfUrl = "/pdf/" + detailData.dpdf; // Adjust according to your data structure
-            // alert(pdfUrl);
-            // var modalBody = '<div class="container">';
-            // modalBody += '<div class="row">';
-            // modalBody +=
-            //     '<iframe src="' +
-            //     pdfUrl +
-            //     '" width="100%" height="600px"></iframe>';
-            // modalBody += "</div>";
-            // modalBody += "</div>";
-
-            // // Populate modal with data
-            // $("#myModalLabel").text(modalTitle);
-            // $("#modal_footer").text(modalFooter);
-            // $(".modal-body").html(modalBody);
-
-            // // Open modal
-            // $("#myModalPDF").modal("show");
-
-            // // Close Modal
-            // $("#closeModalButton").click(function () {
-            //     $("#myModalPDF").modal("hide");
-            // });
-            // },
-            // error: function (xhr, status, error) {
-            //     console.error(xhr.responseText);
-            // },
         });
     }
-
-    // Make sure to attach the event handler to the PDF buttons
-    $(document).on("click", ".modalDataPDF", handleModalDataPDFClick);
 
     function getFilters() {
         return {
@@ -367,10 +303,7 @@ $(document).ready(function () {
                 )}</td>
                 <td><button class="btn btn-primary btn-sm modalData" data-id="${
                     item.id
-                }">View</button>
-                    <button class="btn btn-secondary btn-sm modalDataPDF" data-id="${
-                        item.id
-                    }">PDF</button></td>
+                }">View Details</button>
             `;
         };
         fetchJudgements(
@@ -399,10 +332,7 @@ $(document).ready(function () {
                 <td><button class="btn btn-primary btn-sm modalData" data-id="${
                     item.id
                 }">View</button>
-                    <button class="btn btn-secondary btn-sm modalDataPDF" data-id="${
-                        item.id
-                    }">PDF</button></td>
-            `;
+                   </td>`;
         };
         fetchJudgements(
             url,
@@ -440,10 +370,7 @@ $(document).ready(function () {
                 <td><button class="btn btn-primary btn-sm modalData" data-id="${
                     item.id
                 }">View</button>
-                    <button class="btn btn-secondary btn-sm modalDataPDF" data-id="${
-                        item.id
-                    }">PDF</button></td>
-            `;
+                </td>`;
         };
         fetchJudgements(
             url,
@@ -472,10 +399,7 @@ $(document).ready(function () {
                 <td><button class="btn btn-primary btn-sm modalData" data-id="${
                     item.id
                 }">View</button>
-                    <button class="btn btn-secondary btn-sm modalDataPDF" data-id="${
-                        item.id
-                    }">PDF</button></td>
-            `;
+                </td>`;
         };
         fetchJudgements(
             url,
@@ -520,10 +444,7 @@ $(document).ready(function () {
                 <td><button class="btn btn-primary btn-sm modalData" data-id="${
                     item.id
                 }">View</button>
-                    <button class="btn btn-secondary btn-sm modalDataPDF" data-id="${
-                        item.id
-                    }">PDF</button></td>
-            `;
+                </td>`;
         };
         fetchJudgements(
             url,
@@ -554,11 +475,7 @@ $(document).ready(function () {
                 )}</td>
                 <td><button class="btn btn-primary btn-sm modalData" data-id="${
                     item.id
-                }">View</button>
-                    <button class="btn btn-secondary btn-sm modalDataPDF" data-id="${
-                        item.id
-                    }">PDF</button></td>
-            `;
+                }">View</button></td>`;
         };
         fetchJudgements(
             url,
@@ -571,5 +488,5 @@ $(document).ready(function () {
         );
     });
 
-    $(".modalDataPDF").click(handleModalDataPDFClick);
+    // $("#pdfButton").click(handleModalDataPDFClick);
 });

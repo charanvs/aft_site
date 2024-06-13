@@ -6,6 +6,9 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\CaseRegistration;
 
+use Barryvdh\DomPDF\Facade\Pdf;
+
+
 class CaseManagementController extends Controller
 {
     public function ShowCases()
@@ -47,6 +50,24 @@ class CaseManagementController extends Controller
         return response()->json($cases);
     }
 
+    public function GeneratePDF($id)
+    {
+
+        // Fetch the case data using the ID
+        $data = CaseRegistration::with('caseDependencies')->findOrFail($id);
+        $data = $data->toArray();
+
+        // Generate the PDF
+        $pdf = Pdf::loadView('pdf.case_details', compact('data'));
+        return $pdf->download('case_details.pdf');
+
+
+        // return Pdf::loadFile(public_path() . '/myfile.html')->save('/path-to/my_stored_file.pdf')->stream('download.pdf');
+
+
+        // Return the PDF as a response
+        // return $pdf->download('case_details.pdf');
+    }
 
 
 
